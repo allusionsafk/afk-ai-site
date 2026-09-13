@@ -272,8 +272,8 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offs
 }
 .afk-page .wrap{max-width:1280px;padding-inline:32px}
 .afk-page h1,.afk-page h2,.afk-page h3,.afk-page .brand{font-family:var(--display)}
-.afk-page h1{max-width:11ch;margin:0;font-size:clamp(3.5rem,7.4vw,7rem);font-weight:650;line-height:.87;letter-spacing:-.068em;text-wrap:balance}
-.afk-page h2{max-width:15ch;margin:0;font-size:clamp(2.25rem,4.2vw,4.5rem);font-weight:600;line-height:.96;letter-spacing:-.052em;text-wrap:balance}
+.afk-page h1{max-width:11ch;margin:0;font-size:clamp(3.5rem,7.4vw,6.65rem);font-weight:650;line-height:.87;letter-spacing:-.068em;text-wrap:balance}
+.afk-page h2{max-width:15ch;margin:0;font-size:clamp(2.25rem,4.2vw,3.8rem);font-weight:600;line-height:.96;letter-spacing:-.052em;text-wrap:balance}
 .afk-page h3{letter-spacing:-.018em}
 .afk-page p{margin-top:0}
 .afk-page .skip{border-radius:0;background:var(--text);color:var(--bg);font-family:var(--mono);font-size:.82rem}
