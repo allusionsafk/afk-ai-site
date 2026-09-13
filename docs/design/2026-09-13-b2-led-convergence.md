@@ -71,4 +71,3 @@ Use Claude's recovered B2 Instrument System as the visual and structural thesis.
 - Existing Cloudflare Worker and Worker identity remain unchanged.
 - `/download` tag, URL, filename, and SHA-256 pin remain byte-for-byte unchanged.
 - No deploy or merge in this pass.
-

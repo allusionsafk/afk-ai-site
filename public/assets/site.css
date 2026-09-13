@@ -255,7 +255,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offs
    ----------------------------------------------------------------------- */
 .afk-page{
   --bg:#f3f0e8;--band:#ebe7dc;--panel:#faf8f2;--panel-2:#e9e5da;
-  --text:#171a18;--muted:#555d58;--faint:#6b746e;--accent:#1745c7;
+  --text:#171a18;--muted:#555d58;--faint:#505852;--accent:#1745c7;
   --accent-2:#17633a;--warn:#8b4c08;--line:#aeb5ae;--line-soft:#cfd3cd;
   --instrument:#252b27;--paper:#f8f5ed;--shipping-bg:#dfece3;
   --shipping-ink:#163d29;--beta-bg:#f2e4cc;--beta-ink:#623b0b;
@@ -454,6 +454,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offs
 @media (max-width:480px){
   .afk-page .wrap{padding-inline:16px}
   .afk-page h1{font-size:3.42rem}
+  .afk-page .topnav{margin-inline:-16px;padding-inline:16px}
   .hero-lede{font-size:1rem}
   .hero-actions{align-items:stretch;width:100%}
   .hero-actions .btn,.hero-actions .text-link{width:100%;justify-content:center}
@@ -465,6 +466,25 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offs
   .figure-head{align-items:flex-start;flex-direction:column}
   .demo-seam{padding:16px}
   .final-section .btn{width:100%}
+}
+@media (max-width:240px){
+  .instrument-nav-row{gap:8px}
+  .afk-page h1{font-size:2.35rem}
+  .afk-page .topnav{max-width:100%;margin-inline:0;padding-inline:0}
+  .afk-page .topacts{display:grid;grid-template-columns:44px minmax(0,1fr);width:100%;margin-left:0}
+  .afk-page .topacts .btn{min-width:0;padding-inline:8px}
+  .afk-page .topacts .btn.ghost{width:44px;padding:0}
+  .afk-page .topacts .btn.ghost span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  .afk-page .maturity{max-width:100%;gap:6px;padding-inline:6px;font-size:.58rem;letter-spacing:.04em}
+  .requirements span{width:100%;border-right:1px solid var(--line);border-bottom:0}
+  .requirements span:last-child{border-bottom:1px solid var(--line)}
+  .proof-field{grid-template-columns:64px minmax(0,1fr)}
+  .proof-axis{font-size:.54rem;letter-spacing:.04em}
+  .proof-axis span{padding-right:4px}
+  .proof-readouts{padding-left:12px}
+  .proof-readouts dt{font-size:.98rem;overflow-wrap:anywhere}
+  .demo-seam .reference-label{align-items:flex-start;flex-direction:column;gap:6px}
+  .demo-seam .reference-label:after{display:none}
 }
 @media (forced-colors:active){
   .afk-page .maturity,.afk-page .keymark,.afk-page .btn,.afk-page .setup-figure,.afk-page .boundary-map{forced-color-adjust:auto}

@@ -174,4 +174,3 @@ Open a PR to `master` with screenshots, claims audit, tests, CSP, accessibility,
 - [ ] **Step 5: Stop for visual approval**
 
 Report branch, final HEAD, PR URL, screenshot paths, and verification results. Do not merge or deploy.
-

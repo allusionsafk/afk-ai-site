@@ -23,7 +23,7 @@ const mobile = options.mobile === 'true' || (options.mobile !== 'false' && width
 const full = options.full !== 'false';
 const chrome = options.chrome || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 
-if (!url || !output || !Number.isFinite(width) || width < 280 || !Number.isFinite(height)) {
+if (!url || !output || !Number.isFinite(width) || width < 160 || !Number.isFinite(height)) {
   console.error('Usage: node scripts/capture-site.mjs --url URL --out FILE --width PX [--height PX] [--theme light|dark] [--strict false] [--mobile false] [--full false]');
   process.exit(2);
 }
@@ -118,19 +118,64 @@ try {
     expression: 'document.fonts.ready.then(() => new Promise(resolve => setTimeout(resolve, 250)))',
     awaitPromise: true,
   });
+  const hash = new URL(url).hash;
+  if (hash) {
+    await send('Runtime.evaluate', {
+      expression: `document.querySelector(${JSON.stringify(hash)})?.scrollIntoView({ behavior: 'instant', block: 'start' })`,
+    });
+  }
   const measured = await send('Runtime.evaluate', {
     expression: `({
       title: document.title,
       readyState: document.readyState,
       viewportWidth: document.documentElement.clientWidth,
       scrollWidth: document.documentElement.scrollWidth,
-      scrollHeight: document.documentElement.scrollHeight
+      scrollHeight: document.documentElement.scrollHeight,
+      layoutDiagnostics: ['html', 'body', '.instrument-header', '.instrument-nav-row', '.topnav', '.topacts', 'main']
+        .map(selector => {
+          const element = document.querySelector(selector);
+          if (!element) return { selector, missing: true };
+          const rect = element.getBoundingClientRect();
+          const style = getComputedStyle(element);
+          return {
+            selector,
+            clientWidth: element.clientWidth,
+            scrollWidth: element.scrollWidth,
+            left: Math.round(rect.left),
+            right: Math.round(rect.right),
+            width: Math.round(rect.width),
+            overflowX: style.overflowX,
+            minWidth: style.minWidth
+          };
+        }),
+      overflowingElements: [...document.body.querySelectorAll('*')]
+        .map(element => {
+          const rect = element.getBoundingClientRect();
+          return {
+            selector: element.id ? '#' + element.id : element.tagName.toLowerCase() + (element.className && typeof element.className === 'string' ? '.' + element.className.trim().replace(/\\s+/g, '.') : ''),
+            left: Math.round(rect.left),
+            right: Math.round(rect.right),
+            width: Math.round(rect.width)
+          };
+        })
+        .filter(({ left, right }) => left < -1 || right > document.documentElement.clientWidth + 1)
+        .slice(0, 12),
+      intrinsicOverflowElements: [...document.querySelectorAll('main *')]
+        .map(element => ({
+          selector: element.id ? '#' + element.id : element.tagName.toLowerCase() + (element.className && typeof element.className === 'string' ? '.' + element.className.trim().replace(/\\s+/g, '.') : ''),
+          clientWidth: element.clientWidth,
+          scrollWidth: element.scrollWidth,
+          overflowX: getComputedStyle(element).overflowX
+        }))
+        .filter(({ clientWidth, scrollWidth, overflowX }) => scrollWidth > clientWidth + 1 && overflowX === 'visible')
+        .slice(0, 20)
     })`,
     returnByValue: true,
   });
   const metrics = measured.result.value;
   if (metrics.scrollWidth > metrics.viewportWidth + 1) {
-    runtimeErrors.push(`horizontal overflow ${metrics.scrollWidth}px > ${metrics.viewportWidth}px`);
+    const offenders = metrics.overflowingElements.map(({ selector, right }) => `${selector} (${right}px)`).join(', ');
+    runtimeErrors.push(`horizontal overflow ${metrics.scrollWidth}px > ${metrics.viewportWidth}px${offenders ? `; offenders: ${offenders}` : ''}`);
   }
   const screenshot = await send('Page.captureScreenshot', {
     format: 'png',
