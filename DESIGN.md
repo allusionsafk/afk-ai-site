@@ -1,24 +1,6 @@
 ---
 name: AFK AI site
-description: Local-first Windows AI landing page with light and dark themes and no third-party page origins.
-colors:
-  day-sky: "#f6f8fc"
-  day-panel: "#ffffff"
-  day-panel-2: "#f3f6fb"
-  day-ink: "#0a0c14"
-  day-muted: "#5b6980"
-  day-line: "#dbe4f0"
-  night-sky: "#090d18"
-  night-panel: "#0f1627"
-  night-panel-2: "#121b30"
-  night-ink: "#eef2ff"
-  night-muted: "#94a3b8"
-  night-line: "#253049"
-  accent-blue: "#2563eb"
-  accent-blue-dark: "#7aa2ff"
-  signal-emerald: "#10b981"
-  signal-emerald-dark: "#5eead4"
-  code-well: "#0b1020"
+description: Local-first Windows AI landing page using the B2 instrument/editorial system with light and dark themes and no third-party page origins.
 typography:
   display: "Bricolage Grotesque"
   body: "system-ui"
@@ -27,86 +9,101 @@ typography:
 
 # AFK AI design system
 
-The site should present AFK AI as straightforward Windows software. Product status, requirements, privacy limits, and download behaviour should be easy to find without decorative complexity.
+The deployed site presents AFK AI as straightforward Windows software with an instrument/editorial character. Product status, requirements, privacy limits, download behaviour, and development direction should be easy to distinguish without fake product theatre.
 
-## Foundations
-
-### Colour
-
-| Role | Light | Dark |
-|---|---|---|
-| Page | `#f6f8fc` | `#090d18` |
-| Panel | `#ffffff` | `#0f1627` |
-| Secondary panel | `#f3f6fb` | `#121b30` |
-| Text | `#0a0c14` | `#eef2ff` |
-| Muted text | `#5b6980` | `#94a3b8` |
-| Border | `#dbe4f0` | `#253049` |
-| Action | `#2563eb` | `#7aa2ff` |
-| Positive state | `#10b981` | `#5eead4` |
-
-Use colour to communicate hierarchy or state. Decorative colour should be limited.
+## Core visual system
 
 ### Typography
 
 - Display: Bricolage Grotesque
 - Body: system UI stack
-- Technical values: IBM Plex Mono
+- Evidence/status/technical labels: IBM Plex Mono
 
-Use the mono face for ports, commands, hashes, model identifiers, versions, and compact machine-status labels. Use the body face for normal prose.
+Use the mono face for ports, commands, hashes, versions, maturity labels, figure labels, and compact evidence text. Use the body face for normal prose.
 
-### Shape
+### Structure
 
-- card radius: `12px`
-- pill radius: `9999px`
-- one-pixel borders
-- restrained shadows
-- no glass effects
+The current B2-derived system uses:
+
+- paper-like neutral light surfaces
+- dark proof/evidence bands where a stronger contrast boundary is useful
+- one-pixel rules and registration lines
+- hanging notation and compact reference labels
+- semantic figures rather than fabricated screenshots
+- restrained radii and minimal decorative shadow
+- clear vertical rhythm rather than card-grid density
+
+Do not regress to generic SaaS cards, glass effects, neon AI styling, or oversized decorative gradients.
 
 ## Page hierarchy
 
-The first screen should answer three questions:
+The first screen should answer three questions quickly:
 
 1. What is AFK AI?
-2. Who is it for?
+2. Why would a Windows user care?
 3. Where is the download?
 
-The current headline is:
+Current headline:
 
-> **Your AI. Your PC.**
+> **Local AI on Windows. Less plumbing.**
 
-Supporting copy must describe local inference without implying that the product is permanently offline.
+The hero keeps the pinned Beta/version visible, presents system requirements near the main CTA, and uses a labelled setup-path figure instead of fake UI.
 
 Current section order:
 
-1. hero and download
-2. installation overview
-3. Control Center
-4. local and network behaviour
-5. closing download action
+1. hero + setup-path figure
+2. shipping-now evidence
+3. Beta limitations
+4. Control Center proof figure
+5. local/network boundary
+6. development direction
+7. reserved real-demo seam
+8. closing download action
 
-Detailed implementation material belongs in GitHub documentation rather than the landing page.
+Detailed implementation material belongs in GitHub documentation rather than the first screen.
+
+## Maturity vocabulary
+
+Use professional, literal states:
+
+- Shipping now
+- Beta
+- Beta limits
+- Development direction
+- Release candidate where appropriate
+
+Keep exact versions separate from status labels, for example:
+
+> `Beta · 0.1.7rc1`
+
+Do not introduce `Friend Beta` in current public copy.
+
+Roadmap material must never look like a currently available feature.
 
 ## Components
 
 ### Buttons
 
-Primary buttons need a visible focus state, clear action text, and no hidden interaction or urgency language.
+Primary buttons need visible focus, clear action text, practical touch targets, and no urgency language.
 
-### Cards
+### Reference labels
 
-Cards use neutral surfaces, one-pixel borders, 12px radius, restrained shadow, and enough padding to separate groups of information.
+Use compact mono labels such as `AFK / 001`, `TRUTH / A`, or `FIG. 01` to orient evidence and sections. Do not add them merely as decoration; each should help establish hierarchy or meaning.
 
-### Status chips
+### Evidence figures
 
-Use chips only for real state such as Friend Beta status, version, local endpoint, or health state.
+The current site intentionally uses semantic figures instead of product mockups:
 
-### Code and technical values
+- setup path
+- Control Center capability proof
+- local-versus-network boundary
+- reserved future demo seam
 
-Code blocks use the dark code surface in both themes. This keeps technical material visually stable without making the overall page resemble a terminal.
+A figure must remain truthful, labelled, and readable without pretending to be the real interface.
 
-### Progressive disclosure
+### Status treatments
 
-Use `<details>` only for genuinely optional secondary material. Requirements and risks must remain visible without expansion.
+Status/maturity labels are literal product state, not promotional badges. Keep them short and visually subordinate to the product name/headline.
 
 ## Copy
 
@@ -150,6 +147,7 @@ Maintain:
 - reduced-motion support
 - accessible theme controls
 - sensible reading order without CSS
+- no horizontal page overflow at narrow mobile widths and reasonable zoom reflow
 
 Do not use colour as the only indicator of meaning.
 
@@ -159,6 +157,12 @@ Keep scripts, styles, fonts, and assets same-origin. Avoid inline scripts, inlin
 
 Visual changes should not weaken the Content Security Policy.
 
+## Maker identity
+
+AFK AI owns the page. Allusions appears only as a quiet maker attribution.
+
+The maker link should point to the real Allusions studio site once that production URL exists and has been verified. Until then, do not create a fake destination.
+
 ## Review checklist
 
 Before shipping a public-facing change, confirm that:
@@ -167,8 +171,10 @@ Before shipping a public-facing change, confirm that:
 - the first screen explains the product quickly
 - the download path is obvious
 - local-first wording is precise
-- requirements and Friend Beta status are visible
+- shipping behavior, Beta limits, and development direction remain distinct
+- the exact version is visible without informal status language
 - no third-party page origin was added without review
 - light and dark mode still work
 - public copy contains no em dash
+- accessibility/CSP/reflow contracts remain intact
 - the change adds useful information rather than visual noise

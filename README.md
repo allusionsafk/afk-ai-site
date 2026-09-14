@@ -6,7 +6,7 @@ Public landing page and download route for [AFK AI for Windows](https://github.c
 
 [Product](PRODUCT.md) | [Design](DESIGN.md) | [Support](SUPPORT.md) | [Security](SECURITY.md) | [Contributing](CONTRIBUTING.md)
 
-The site uses static HTML, CSS, and JavaScript plus one Cloudflare Worker route for the pinned Friend Beta installer.
+The site uses static HTML, CSS, and JavaScript plus one Cloudflare Worker route for the pinned AFK AI Beta installer.
 
 ## Public behaviour
 
@@ -14,12 +14,12 @@ The site uses static HTML, CSS, and JavaScript plus one Cloudflare Worker route 
 |---|---|
 | Homepage | Static. No accounts, forms, or analytics |
 | Download route | `/download` |
-| Pinned candidate | Friend Beta `0.1.7rc1` |
+| Pinned candidate | AFK AI Beta `0.1.7rc1` |
 | Integrity | SHA-256 checked before installer bytes are returned |
 | Failure mode | Refuse the download on upstream or hash mismatch |
 | Version authority | Website pin, not `releases/latest` |
 
-The repository also serves an Adaptive Media page under `/adaptive-media/`. It does not control the AFK AI download route.
+The repository also serves a legacy media page under `/adaptive-media/`. It does not control the AFK AI download route. Public product naming for that project is now **DemiMedia**; the legacy path remains for compatibility until the dedicated DemiMedia site is launched.
 
 ## Structure
 
@@ -81,7 +81,7 @@ See [SECURITY.md](SECURITY.md) for private vulnerability reporting and [SUPPORT.
 
 ## Public copy
 
-Public copy should be short, specific, and supported by current product behaviour. Avoid unsupported privacy, platform, release, usage, or deployment claims.
+Public copy should be short, specific, and supported by current product behaviour. Use professional status language such as **Beta** or **Release candidate** and keep the exact version separate from the status label. Avoid unsupported privacy, platform, release, usage, or deployment claims.
 
 ## Licence
 

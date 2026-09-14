@@ -25,15 +25,16 @@ console.log('Case H1 - product hierarchy and conversion:');
 const h1s = [...source.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)];
 check('homepage has exactly one h1', h1s.length === 1, String(h1s.length));
 check('AFK AI is named before Allusions in visible content', text.indexOf('AFK AI') >= 0 && text.indexOf('AFK AI') < text.indexOf('Allusions'));
-check('homepage keeps the pinned Friend Beta version visible', /Friend Beta[\s\S]{0,160}0\.1\.7rc1|0\.1\.7rc1[\s\S]{0,160}Friend Beta/i.test(source));
+check('homepage keeps the pinned Beta version visible', /Beta[\s\S]{0,160}0\.1\.7rc1|0\.1\.7rc1[\s\S]{0,160}Beta/i.test(source));
 check('homepage has at least two direct download calls to action', (source.match(/href=["']\/download["']/g) || []).length >= 2);
 check('maker attribution is subordinate and explicit', /Built by\s+<a[^>]*>Allusions<\/a>/i.test(source));
+check('legacy Friend Beta wording is absent', !/Friend Beta/i.test(source));
 
 console.log('Case H2 - maturity and evidence structure:');
 for (const maturity of ['shipping', 'beta', 'direction']) {
   check(`has a ${maturity} maturity section`, new RegExp(`<section\\b[^>]*data-maturity=["']${maturity}["']`, 'i').test(source));
 }
-check('maturity headings use approved language', /Shipping now/i.test(text) && /Friend Beta limits/i.test(text) && /Development direction/i.test(text));
+check('maturity headings use approved language', /Shipping now/i.test(text) && /Beta limits/i.test(text) && /Development direction/i.test(text));
 check('setup path is a labelled figure', /<figure\b[^>]*class=["'][^"']*setup-figure[^"']*["'][^>]*>[\s\S]*?<figcaption/i.test(source));
 check('product proof is a labelled asymmetric figure', /<figure\b[^>]*class=["'][^"']*proof-figure[^"']*["'][^>]*>[\s\S]*?<figcaption/i.test(source));
 check('future demo seam is truthfully labelled', /class=["'][^"']*demo-seam[^"']*["'][\s\S]*20[–-]60 second product demo/i.test(source));
