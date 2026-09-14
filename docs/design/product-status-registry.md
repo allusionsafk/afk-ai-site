@@ -34,29 +34,55 @@ This file exists to stop product pages from inventing or accidentally promoting 
 
 **Public product name:** DemiMedia.
 
-**Engineering repository state:** Active development in `allusionsafk/adaptive-media`.
+**Engineering repository:** `allusionsafk/adaptive-media`.
 
-The current engineering repository describes a Windows 11 media player built with .NET/WPF and mpv/gpu-next/libplacebo/FFmpeg. It also states that the historical `v0.4.0-rc1` prerelease remains in the former shared repository and has not been republished from the standalone repository.
+**Current authoritative public/default state:** `main @ 32242a9f384b76fe1402b91c18ce4507b0e2b2c3`.
 
-**Safe public claims from current canonical main:**
+**Current strongest closure-qualified engineering state:** `codex/native-dv-playback-health-fixes @ f49d489519042c2aab940fb02e7cc9326342c641`.
 
-- Windows 11 media player focused on dependable playback;
-- reference playback is the default;
-- enhancement controls are explicit user choices;
-- requested settings and observed runtime state are kept separate;
-- degraded/unsupported paths should be visible;
-- Profile 7 to Profile 8.1 conversion work is evidence-backed and bounded where supported;
-- temporary media scratch space for that conversion path is bounded;
-- decoded PCM is the safe audio default and HDMI bitstream output is optional.
+The closure-qualified branch is stronger product evidence for native Profile 7 playback/runtime recovery, but it is not yet merged into `main` and is not a release. The standalone repository currently has no GitHub releases. Historical Adaptive Media prereleases remain provenance only and must not be presented as a current DemiMedia download.
 
-**Do not claim from the current public main page:**
+**Safe public claims from current product truth:**
 
-- universal Dolby Vision correctness;
-- native Windows Profile 7 FEL passthrough unless the exact promoted build proves it;
-- universal HDMI/Atmos/HDR switching behavior;
-- a current standalone public release unless one has actually been republished there.
+- Windows 11 media player built as a self-contained .NET/WPF application around mpv/gpu-next/libplacebo/FFmpeg, with MPC-BE compatibility fallback;
+- playback planning around source, hardware/display conditions, and requested processing rather than blindly forwarding options;
+- a dedicated Reference preset and a reference-first design philosophy;
+- explicit enhancement controls, including scaling, motion modes, banding reduction, RTX Video Super Resolution, and experimental RTX Video HDR where supported;
+- requested settings, planned path, observed runtime state, and fallback outcome are intentionally distinct concepts;
+- hardware decode is used on qualified paths where supported;
+- decoded PCM is the safe audio default;
+- Profile 7 → Profile 8.1 compatibility export is evidence-backed and bounded, with FEL picture contribution explicitly discarded for FEL export;
+- diagnostics and settings persistence are part of the product behavior.
 
-**Naming rule:** use `DemiMedia` on public-facing web surfaces. `Adaptive Media` may remain only where needed to identify the existing engineering repository/history. `Demi Player` is obsolete as a public-name candidate.
+**Important correction:** do **not** say Reference is the default preset. The current UI default/first selection is **Automatic**. Use `reference-first design` instead.
+
+**Development-only claims that require explicit Experimental/Development treatment:**
+
+- native Profile 7 playback;
+- observed FEL composition on the closure-qualified development path;
+- runtime generation/provisioning and previous-generation one-shot rollback;
+- zero media-sized scratch during native P7 playback;
+- automatic HDR switching/restoration;
+- RTX Video HDR.
+
+**Native P7 evidence boundary:** the closure-qualified path has strong evidence for separate BL/EL hardware decoding, pairing, RPU/NLQ handling, observed composition, deterministic enhancement-layer control, and zero media-sized playback scratch on the certified development configuration. This does not justify universal title/display/GPU claims and must not be described as proprietary TV-led Dolby Vision passthrough.
+
+**Do not claim:**
+
+- universal Dolby Vision support;
+- Dolby Vision passthrough;
+- full FEL fidelity for every Profile 7 title;
+- guaranteed Atmos passthrough;
+- automatic HDR on every display;
+- AI frame generation;
+- ordinary High Quality scaling as `AI upscaling`;
+- lossless P7 FEL → P8.1 conversion;
+- zero scratch for compatibility export;
+- all-GPU or cross-platform support;
+- a stable release;
+- a current DemiMedia download until one is actually published under the current product identity.
+
+**Naming rule:** use `DemiMedia` on public-facing web surfaces. `Adaptive Media` may remain only where needed to identify existing repository/history/compatibility identifiers. `Demi Player` is obsolete as a public-name candidate.
 
 ## ValClips
 
