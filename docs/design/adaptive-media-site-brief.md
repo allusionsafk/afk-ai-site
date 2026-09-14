@@ -1,16 +1,22 @@
-# Adaptive Media product-site brief
+# DemiMedia product-site brief
 
 Status: planning artifact only. Do not treat this as release documentation.
 
+## Naming
+
+**Public product name:** DemiMedia.
+
+The existing engineering repository may remain `allusionsafk/adaptive-media` until a separate repository-identity migration is explicitly approved. Public-facing copy should use DemiMedia. `Adaptive Media` is legacy/engineering naming; `Demi Player` is obsolete as a public-name candidate.
+
 ## Product role
 
-Adaptive Media should have its own dedicated product presence rather than remain a secondary route under the AFK AI site.
+DemiMedia should have its own dedicated product presence rather than remain a secondary route under the AFK AI site.
 
 The product story is not "another mpv front-end." The useful distinction is that the player treats playback as an observable system: the media, renderer path, display chain, hardware capability, requested settings, and observed runtime state are allowed to disagree, and the product should surface that rather than hiding it.
 
 ## Current public truth to preserve
 
-The standalone repository currently describes:
+The standalone engineering repository currently describes:
 
 - Windows 11 target;
 - .NET/WPF application;
@@ -44,7 +50,7 @@ Avoid generic claims such as "best quality," "ultimate player," or "plays everyt
 
 Answer immediately:
 
-- What is Adaptive Media?
+- What is DemiMedia?
 - Why would a technically demanding user care?
 - Is there a current public build or is this active development?
 
@@ -186,7 +192,7 @@ Prefer a standalone static site/repository when production work starts:
 
 Do not launch the dedicated site until:
 
-- public product name is settled (`Adaptive Media` unless `Demi Player` is explicitly approved);
+- DemiMedia public naming is used consistently;
 - release authority is clear;
 - current product status is re-verified;
 - screenshots, if used, are from the current product;
