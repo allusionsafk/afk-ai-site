@@ -1,6 +1,8 @@
 # Web sprint — next implementation packet
 
-Status: handoff for the next coding agent after AFK Product Utility stack reconciliation. This document intentionally removes most historical context so the next pass can start quickly.
+Status: AFK Product Utility repository reconciliation is complete enough to unblock web Packet A. Public AFK PR #22 is the clean reconciliation line; AFK Product Shell + app-owned Python remains separate product work and may proceed in parallel.
+
+This document intentionally removes most historical context so the next pass can start quickly.
 
 ## Priority order
 
@@ -10,7 +12,7 @@ Status: handoff for the next coding agent after AFK Product Utility stack reconc
 4. ValClips public evidence/product surface
 5. cross-site link/status normalization
 
-Do not resume broad product engineering in the middle of this web sprint unless a product release dependency blocks truthful website work.
+Do not serialize unrelated product engineering behind the web sprint. AFK Product Shell, Adaptive Media, and ValClips work may continue in isolated lanes. Only pause a specific operation for an actual shared-machine or release-authority conflict.
 
 ## Packet A — Allusions studio
 
@@ -51,6 +53,10 @@ Stop for visual approval after a production-ready dedicated-repo branch and scre
 
 Keep the deployed B2 design intact. Change identity/terminology only.
 
+### Prerequisite now satisfied
+
+The previously blocking Product Utility repository reconciliation has a clean review line in AFK PR #22. Do not confuse that with completion of Product Shell + app-owned Python; those product changes are separate from this website identity pass.
+
 ### Work
 
 - retire current `Friend Beta` copy in user-facing/canonical surfaces;
@@ -58,7 +64,7 @@ Keep the deployed B2 design intact. Change identity/terminology only.
 - point `Built by Allusions` to the live studio site once it exists;
 - update metadata/tests/docs;
 - inventory repository rename dependencies;
-- if the AFK stack is clean, execute public repo renames only as a separately reviewed operation.
+- execute public repo renames only as a separately reviewed operation after #22 disposition and link/download dependency verification.
 
 ### Do not
 
