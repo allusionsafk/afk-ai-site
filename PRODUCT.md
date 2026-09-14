@@ -1,6 +1,6 @@
 # AFK AI website product brief
 
-AFK AI is a local-first AI workspace for Windows. The website explains the product, its privacy model, current hardware expectations, and the Friend Beta download path.
+AFK AI is a local-first AI workspace for Windows. The website explains the product, its privacy model, current hardware expectations, and the pinned Beta download path.
 
 ## Audience
 
@@ -41,9 +41,13 @@ A visitor should be able to answer these questions quickly:
 
 Public copy should be calm, direct, and technically accurate.
 
-Use short sentences. Put important tradeoffs near the feature they qualify. Explain technical requirements in normal language. State Friend Beta limitations plainly. Do not imply control over third-party behaviour that AFK AI does not own.
+Use short sentences. Put important tradeoffs near the feature they qualify. Explain technical requirements in normal language. State Beta limitations plainly. Do not imply control over third-party behaviour that AFK AI does not own.
 
 Avoid hype, urgency, vanity metrics, vague privacy claims, fake screenshots, fake testimonials, and unexplained jargon.
+
+## Status language
+
+Use professional, literal status labels such as **Beta**, **Release candidate**, **Preview**, or **In development**. Keep the exact version/tag separate from the status label. Do not use `Friend Beta` in current public copy.
 
 ## Privacy wording
 
@@ -61,27 +65,23 @@ Current product behaviour includes:
 
 ## Visual direction
 
-The site should be clean, restrained, and readable in light and dark mode.
+The deployed B2 homepage uses a restrained instrument/editorial system in light and dark mode:
 
-Typography:
-
-- Bricolage Grotesque for display text
-- system UI for body copy
-- IBM Plex Mono for ports, commands, hashes, versions, and model identifiers
-
-Colour:
-
-- blue for primary action
-- emerald for positive state
-- neutral surfaces for structure
+- Bricolage Grotesque display typography
+- IBM Plex Mono for evidence/status labels
+- ruled sections and hanging notation
+- semantic setup/runtime figures rather than fabricated UI
+- paper-like light surfaces and dark proof bands
+- explicit separation of shipping behavior, Beta limits, and development direction
 
 Avoid decorative dashboards, glass effects, heavy gradients, fake technical styling, and visual elements that imply unsupported functionality.
 
 ## Design principles
 
 1. Product claims stay close to their limits and requirements.
-2. The public site remains a simple document with real anchors rather than a single-page application.
-3. Fonts and assets remain self-hosted.
-4. Technical identifiers use the mono typeface consistently.
-5. Detailed implementation material belongs in GitHub documentation rather than the first screen.
-6. Screenshots, metrics, testimonials, and product claims must be real and supportable.
+2. Shipping behavior, Beta limitations, and development direction remain visually distinct.
+3. The public site remains a simple document with real anchors rather than a single-page application.
+4. Fonts and assets remain self-hosted.
+5. Technical identifiers use the mono typeface consistently.
+6. Detailed implementation material belongs in GitHub documentation rather than the first screen.
+7. Screenshots, metrics, testimonials, and product claims must be real and supportable.
