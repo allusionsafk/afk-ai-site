@@ -29,10 +29,10 @@ Use as maker/umbrella identity.
 ### Products
 
 - **AFK AI** — current public product name.
-- **Adaptive Media** — current public media-product name until a deliberate rename is approved.
+- **DemiMedia** — current public media-product name.
 - **ValClips** — current product name; preserve capitalization consistently.
 
-`Demi Player` is a candidate presentation name, not yet a cross-site rename instruction.
+`Adaptive Media` is now a legacy/engineering repository identity where it remains in use (for example `allusionsafk/adaptive-media`), not the public product name. `Demi Player` is obsolete as a public-name candidate.
 
 ## Maker attribution
 
@@ -60,7 +60,7 @@ The exact version/tag is separate from the status label.
 Examples:
 
 - `AFK AI Beta · 0.1.7rc1`
-- `Adaptive Media · In development`
+- `DemiMedia · In development`
 - `ValClips · In development`
 
 Do not introduce `Friend Beta` in new work.
@@ -90,7 +90,7 @@ Product footer/maker treatment links back to Allusions.
 
 Do not add a persistent cross-product mega-nav unless user testing shows it helps. The studio homepage is the portfolio switchboard.
 
-This keeps AFK, Adaptive Media, and ValClips from looking like tabs in one application.
+This keeps AFK AI, DemiMedia, and ValClips from looking like tabs in one application.
 
 ## Visual family traits
 
@@ -126,7 +126,7 @@ D2-led modernist editorial identity:
 - little or no product UI chrome;
 - projects differentiated by typography/status/proof point.
 
-### Adaptive Media
+### DemiMedia
 
 Technical/cinematic identity:
 
@@ -185,6 +185,8 @@ When public repositories are renamed:
 - verify release/download URLs;
 - avoid renaming deployment IDs in the same pass unless necessary;
 - test external links after the migration.
+
+For DemiMedia specifically, the public product name may be DemiMedia while the engineering repository remains `allusionsafk/adaptive-media` until a separate repository-identity decision is made.
 
 ## SEO/social identity
 
