@@ -1,6 +1,6 @@
 # AFK AI website support
 
-Use this repository for problems with the public AFK AI website and its pinned Friend Beta download route.
+Use this repository for problems with the public AFK AI website and its pinned Beta download route.
 
 ## Report here
 
@@ -24,7 +24,7 @@ https://github.com/allusionsafk/localai-windows-starter/blob/master/SUPPORT.md
 
 ## Download problems
 
-The website serves a pinned Friend Beta installer through `/download` and verifies its SHA-256 before returning the file.
+The website serves a pinned AFK AI Beta installer through `/download` and verifies its SHA-256 before returning the file.
 
 If that route fails, include:
 
