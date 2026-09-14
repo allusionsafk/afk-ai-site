@@ -5,9 +5,7 @@ Verified locally on 2026-09-13. No production deployment or merge was performed.
 ## Repository boundary
 
 - Base: `origin/master` at `e63e3598849f8381baaacd5b8ce4729a8e1d591f`.
-- Feature branch: `codex/b2-led-site-convergence`.
-- Isolated worktree: `C:\Users\jidan\.codex\visualizations\2026\09\13\01a09b78-4190-7793-8daf-51060895b74a\site-b2-convergence`.
-- The original `codex/friend-beta-trust-surface-fix` checkout and the unrelated `feat/site-product-redesign-2026-08` worktree were not modified.
+- Verification was performed in an isolated worktree without modifying unrelated checkouts.
 
 ## Automated tests
 

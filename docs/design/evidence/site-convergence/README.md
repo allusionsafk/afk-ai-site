@@ -2,13 +2,9 @@
 
 Captured 2026-09-13 with `scripts/capture-site.mjs` and local headless Chrome. The capture utility uses Chrome DevTools Protocol, waits for fonts, records console/page errors and layout dimensions, and fails strict captures on horizontal overflow.
 
-## Recovered reference lineage
+## Reference lineage
 
-The recovered Claude canvas workspace was read from:
-
-`C:\Users\jidan\AppData\Local\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Local\AllusionsWebDev\site`
-
-The source prototypes are not copied into production. Their SHA-256 values preserve exact lineage:
+The archived source prototypes are not copied into production. Their SHA-256 values preserve exact lineage without publishing local workspace details:
 
 | Direction | Artifact | SHA-256 |
 | --- | --- | --- |

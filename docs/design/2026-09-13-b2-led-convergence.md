@@ -2,12 +2,12 @@
 
 ## Decision
 
-Use Claude's recovered B2 Instrument System as the visual and structural thesis. Import exactly one D2 idea: an asymmetric, figure-like product-proof composition. AFK AI remains the primary product; Allusions appears only as the subordinate maker identity.
+Use the approved B2 Instrument System as the visual and structural thesis. Import exactly one D2 idea: an asymmetric, figure-like product-proof composition. AFK AI remains the primary product; Allusions appears only as the subordinate maker identity.
 
-## Recovered evidence
+## Design references
 
-- B2 source artifacts: `Instrument2Desktop.dc.html`, `Instrument2Mobile.dc.html`, and `Instrument2Products.dc.html` in the recovered Claude canvas workspace.
-- D2 source artifacts: `Modernist2Desktop.dc.html`, `Modernist2Mobile.dc.html`, and `Modernist2Products.dc.html` in the recovered Claude canvas workspace.
+- B2 source artifacts: `Instrument2Desktop.dc.html`, `Instrument2Mobile.dc.html`, and `Instrument2Products.dc.html` from the archived design references.
+- D2 source artifacts: `Modernist2Desktop.dc.html`, `Modernist2Mobile.dc.html`, and `Modernist2Products.dc.html` from the archived design references.
 - Both directions are complete visual prototypes, not production implementations. Their remote fonts, inline CSS, provisional claims, and placeholder image zones cannot ship unchanged.
 - No clean AFK AI product screenshot was found. The site must use an HTML/CSS setup-path schematic and preserve a clearly labelled future demo seam.
 
