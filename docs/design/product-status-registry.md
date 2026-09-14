@@ -30,11 +30,13 @@ This file exists to stop product pages from inventing or accidentally promoting 
 
 **Terminology:** do not introduce `Friend Beta` in new material. Preferred direction is `AFK AI Beta` or exact release-candidate wording plus the exact version.
 
-## Adaptive Media
+## DemiMedia
 
-**Public repository state:** Active development.
+**Public product name:** DemiMedia.
 
-The standalone `allusionsafk/adaptive-media` repository describes a Windows 11 media player built with .NET/WPF and mpv/gpu-next/libplacebo/FFmpeg. It also states that the historical `v0.4.0-rc1` prerelease remains in the former shared repository and has not been republished from the standalone repository.
+**Engineering repository state:** Active development in `allusionsafk/adaptive-media`.
+
+The current engineering repository describes a Windows 11 media player built with .NET/WPF and mpv/gpu-next/libplacebo/FFmpeg. It also states that the historical `v0.4.0-rc1` prerelease remains in the former shared repository and has not been republished from the standalone repository.
 
 **Safe public claims from current canonical main:**
 
@@ -50,11 +52,11 @@ The standalone `allusionsafk/adaptive-media` repository describes a Windows 11 m
 **Do not claim from the current public main page:**
 
 - universal Dolby Vision correctness;
-- native Windows Profile 7 FEL passthrough;
+- native Windows Profile 7 FEL passthrough unless the exact promoted build proves it;
 - universal HDMI/Atmos/HDR switching behavior;
 - a current standalone public release unless one has actually been republished there.
 
-**Presentation name:** keep `Adaptive Media` until the product name `Demi Player` is explicitly approved and migration/redirect work is planned.
+**Naming rule:** use `DemiMedia` on public-facing web surfaces. `Adaptive Media` may remain only where needed to identify the existing engineering repository/history. `Demi Player` is obsolete as a public-name candidate.
 
 ## ValClips
 
@@ -83,6 +85,10 @@ The current private repository contains a local Node/ESM application and its pac
 **Studio status:** maker/umbrella identity, not a product release channel.
 
 The studio site may describe a common working standard across products but must never flatten product maturity. Every project entry should carry its own current status and link to the product-specific authority.
+
+## Current public naming hierarchy
+
+**ALLUSIONS → AFK AI → DemiMedia → ValClips**
 
 ## Pre-launch rule
 
