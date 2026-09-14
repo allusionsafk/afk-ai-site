@@ -26,6 +26,8 @@ Status: navigation for planning/prototype material on `docs/allusions-web-sprint
 ## AFK AI web identity
 
 - [`terminology-retirement.md`](terminology-retirement.md) — bounded `Friend Beta` retirement policy.
+- [`friend-beta-inventory.md`](friend-beta-inventory.md) — verified current-surface inventory across website, public product repo, and private workbench.
+- [`current-site-doc-drift.md`](current-site-doc-drift.md) — exact repository-documentation drift after the deployed B2 redesign.
 - [`afk-web-identity-cleanup-plan.md`](afk-web-identity-cleanup-plan.md) — terminology, maker link, public repo rename, and deployment boundaries without reopening B2 design.
 
 ## Adaptive Media
