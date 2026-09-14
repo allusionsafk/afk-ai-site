@@ -29,6 +29,7 @@ Status: navigation for planning/prototype material on `docs/allusions-web-sprint
 - [`friend-beta-inventory.md`](friend-beta-inventory.md) — verified current-surface inventory across website, public product repo, and private workbench.
 - [`current-site-doc-drift.md`](current-site-doc-drift.md) — exact repository-documentation drift after the deployed B2 redesign.
 - [`afk-web-identity-cleanup-plan.md`](afk-web-identity-cleanup-plan.md) — terminology, maker link, public repo rename, and deployment boundaries without reopening B2 design.
+- [`afk-public-repository-rename-inventory.md`](afk-public-repository-rename-inventory.md) — dependency/order checklist for `afk-ai` / `afk-ai-site` public repository renames without breaking installer/download integrity.
 
 ## Adaptive Media
 
