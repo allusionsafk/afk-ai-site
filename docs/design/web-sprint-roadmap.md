@@ -2,9 +2,15 @@
 
 Status: planning artifact only. Nothing in this document changes a production deployment.
 
+## Current checkpoint
+
+The AFK Product Utility repository reconciliation checkpoint has been reached. Public AFK PR #22 (`codex/afk-product-utility-integration`, head `c511a5c9c54573c2acebe04a405d9b25394d276e`) is open, mergeable, and green across CI and release-candidate qualification. The reconciliation is therefore no longer a blocker for beginning **Packet A: Allusions studio convergence**.
+
+This does **not** mean AFK Product Utility itself is finished. Product Shell + app-owned Python remains the next AFK product milestone and may proceed in parallel in its own isolated lane. Do not serialize the portfolio around it unless a concrete shared-machine conflict appears.
+
 ## Goal
 
-After the current AFK repository reconciliation checkpoint, prioritize public web presence and naming consistency before resuming another large product-engineering milestone.
+Prioritize public web presence and naming consistency while AFK Product Shell and other product engineering can continue independently in isolated lanes.
 
 ## Sequence
 
