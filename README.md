@@ -1,6 +1,6 @@
 # AFK AI website
 
-Public landing page and download route for [AFK AI for Windows](https://github.com/allusionsafk/localai-windows-starter).
+Public landing page and download route for [AFK AI for Windows](https://github.com/allusionsafk/afk-ai).
 
 **Live site:** https://localai-windows-starter-site.allusionsafk.workers.dev/
 
@@ -14,7 +14,7 @@ The site uses static HTML, CSS, and JavaScript plus one Cloudflare Worker route 
 |---|---|
 | Homepage | Static. No accounts, forms, or analytics |
 | Download route | `/download` |
-| Pinned candidate | AFK AI Beta `0.1.7rc1` |
+| Pinned candidate | AFK AI Beta, version `0.1.7rc1` |
 | Integrity | SHA-256 checked before installer bytes are returned |
 | Failure mode | Refuse the download on upstream or hash mismatch |
 | Version authority | Website pin, not `releases/latest` |
@@ -70,6 +70,14 @@ For `GET` or `HEAD` requests to `/download`, `worker.js`:
 5. refuses the request if retrieval or verification fails
 
 The browser does not select a release dynamically.
+
+The public repository is being renamed to `allusionsafk/afk-ai`. The Worker
+keeps the qualified `0.1.7rc1` raw source URL and SHA-256 unchanged during that
+rename. Before deploying after the rename, verify that the historical raw URL
+still serves the exact pinned bytes; if it does not, change only the repository
+component of the raw URL after independently verifying the same bytes at the
+renamed repository and rerunning the integrity tests. Do not point `/download`
+at the unqualified `0.2.0-rc1` source candidate.
 
 ## Security and privacy
 

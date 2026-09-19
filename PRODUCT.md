@@ -1,6 +1,6 @@
 # AFK AI website product brief
 
-AFK AI is a local-first AI workspace for Windows. The website explains the product, its privacy model, current hardware expectations, and the pinned Beta download path.
+AFK AI is a local-first AI workspace for Windows. The website explains the product, its privacy model, current hardware expectations, and the pinned AFK AI Beta download path.
 
 ## Audience
 
@@ -41,7 +41,7 @@ A visitor should be able to answer these questions quickly:
 
 Public copy should be calm, direct, and technically accurate.
 
-Use short sentences. Put important tradeoffs near the feature they qualify. Explain technical requirements in normal language. State Beta limitations plainly. Do not imply control over third-party behaviour that AFK AI does not own.
+Use short sentences. Put important tradeoffs near the feature they qualify. Explain technical requirements in normal language. State AFK AI Beta limitations plainly. Do not imply control over third-party behaviour that AFK AI does not own.
 
 Avoid hype, urgency, vanity metrics, vague privacy claims, fake screenshots, fake testimonials, and unexplained jargon.
 

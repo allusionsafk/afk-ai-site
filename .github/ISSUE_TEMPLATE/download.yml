@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        The website serves a pinned Friend Beta installer through /download and verifies its SHA-256 before returning the file. Use this form only when that website route is the failing surface.
+        The website serves a pinned AFK AI Beta installer through /download and verifies its SHA-256 before returning the file. Use this form only when that website route is the failing surface.
   - type: input
     id: time
     attributes:

@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: AFK AI product support
-    url: https://github.com/allusionsafk/localai-windows-starter/blob/master/SUPPORT.md
+    url: https://github.com/allusionsafk/afk-ai/blob/master/SUPPORT.md
     about: Use the main AFK AI repository for installer, hardware, runtime, model, Docker, WSL, Ollama, Open WebUI, search, voice, or Control Center support.
   - name: Security vulnerability
-    url: https://github.com/allusionsafk/localai-windows-starter/security/advisories/new
+    url: https://github.com/allusionsafk/afk-ai/security/advisories/new
     about: Report AFK AI website or download-path vulnerabilities through the central private advisory flow. Do not post exploit details, credentials, or secrets in a public issue.

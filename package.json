@@ -1,9 +1,9 @@
 {
-  "name": "localai-windows-starter-site",
+  "name": "afk-ai-site",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "AFK AI website: landing page for localai-windows-starter. Static assets + a Cloudflare Worker that serves the pinned friend-beta installer.",
+  "description": "AFK AI website: landing page and pinned AFK AI Beta installer route.",
   "license": "MIT",
   "scripts": {
     "dev": "wrangler dev",

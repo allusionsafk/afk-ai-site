@@ -6,11 +6,11 @@ Security and privacy reports for the AFK AI website and installer distribution p
 
 Private vulnerability reporting:
 
-https://github.com/allusionsafk/localai-windows-starter/security/advisories/new
+https://github.com/allusionsafk/afk-ai/security/advisories/new
 
 Full AFK AI security policy:
 
-https://github.com/allusionsafk/localai-windows-starter/security/policy
+https://github.com/allusionsafk/afk-ai/security/policy
 
 > [!CAUTION]
 > Do not publish credentials, private logs, exploit details, tokens, cookies, installer secrets, or other sensitive material in a normal GitHub issue.
@@ -19,11 +19,11 @@ https://github.com/allusionsafk/localai-windows-starter/security/policy
 
 Website, layout, accessibility, content, or `/download` failures that contain no sensitive information belong in this repository's issue forms:
 
-https://github.com/allusionsafk/localai-windows-starter-site/issues/new/choose
+https://github.com/allusionsafk/afk-ai-site/issues/new/choose
 
 Installer, hardware, model, Docker, WSL, Ollama, Open WebUI, search, voice, and Control Center support belongs in the main AFK AI repository:
 
-https://github.com/allusionsafk/localai-windows-starter/issues/new/choose
+https://github.com/allusionsafk/afk-ai/issues/new/choose
 
 See [SUPPORT.md](SUPPORT.md) for issue routing.
 

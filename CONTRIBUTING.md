@@ -1,6 +1,6 @@
 # Contributing to the AFK AI website
 
-This repository contains the AFK AI public website and pinned Friend Beta download route.
+This repository contains the AFK AI public website and pinned AFK AI Beta download route.
 
 Use it for:
 
@@ -12,7 +12,7 @@ Use it for:
 - security headers and Content Security Policy
 - website documentation
 
-Use the [AFK AI for Windows repository](https://github.com/allusionsafk/localai-windows-starter) for installer, runtime, model, Docker, Ollama, SearXNG, Open WebUI, hardware, and application-support work.
+Use the [AFK AI for Windows repository](https://github.com/allusionsafk/afk-ai) for installer, runtime, model, Docker, Ollama, SearXNG, Open WebUI, hardware, and application-support work.
 
 Do not mix product-runtime changes into a website pull request.
 
@@ -20,7 +20,7 @@ Do not mix product-runtime changes into a website pull request.
 
 1. Confirm the current behaviour.
 2. Make a focused change.
-3. Preserve the pinned Friend Beta download behaviour unless the pull request is a reviewed release update.
+3. Preserve the pinned AFK AI Beta download behaviour unless the pull request is a reviewed release update.
 4. Run the checks for the area you changed.
 5. Report only verification that actually ran.
 

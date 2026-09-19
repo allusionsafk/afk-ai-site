@@ -1,6 +1,6 @@
 # AFK AI website support
 
-Use this repository for problems with the public AFK AI website and its pinned Beta download route.
+Use this repository for problems with the public AFK AI website and its pinned AFK AI Beta download route.
 
 ## Report here
 
@@ -20,7 +20,7 @@ Choose the issue form that best matches the problem and include only the informa
 
 For AFK AI installation, Windows prerequisites, hardware compatibility, Docker, WSL, Ollama, models, Open WebUI, search, voice, Control Center, or other runtime behaviour, use the main project support page:
 
-https://github.com/allusionsafk/localai-windows-starter/blob/master/SUPPORT.md
+https://github.com/allusionsafk/afk-ai/blob/master/SUPPORT.md
 
 ## Download problems
 

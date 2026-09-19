@@ -5,10 +5,10 @@
 // route, /download, and delegates everything else to assets.
 //
 // WHY /download EXISTS
-// The friend beta is distributed from a PINNED TAG, not from a GitHub Release.
+// AFK AI Beta is distributed from a PINNED TAG, not from a GitHub Release.
 // An earlier /api/release route resolved dynamically through the Releases API,
 // which made AFK AI delivery depend on whatever release GitHub considered
-// current rather than on the reviewed Friend Beta candidate. That mechanism is
+// current rather than on the reviewed AFK AI Beta candidate. That mechanism is
 // gone. Nothing on this site consults releases/latest, and releases for other
 // work in the starter repository do not change the AFK AI download pin.
 //
@@ -25,13 +25,17 @@
 //     cannot bypass the edge cache and hammer the upstream.
 //   - generic error shape only; upstream error details are never echoed.
 
-const REPO = 'allusionsafk/localai-windows-starter';
+// Public repository identity changes with the GitHub rename. The qualified
+// installer source remains at its historical URL until that exact artifact is
+// verified at the renamed raw URL. Do not couple this to the public link name.
+const PUBLIC_REPO = 'allusionsafk/afk-ai';
+const PINNED_SOURCE_REPO = 'allusionsafk/localai-windows-starter';
 
-// The frozen friend-beta candidate. Bumping the beta means changing these three
-// lines and nothing else.
+// The frozen AFK AI Beta artifact; keep tag, source URL, and digest unchanged
+// during repository-identity work.
 const RC_TAG = 'v0.1.7rc1';
 const INSTALLER_SOURCE =
-  `https://raw.githubusercontent.com/${REPO}/${RC_TAG}/Install%20Local%20AI.cmd`;
+  `https://raw.githubusercontent.com/${PINNED_SOURCE_REPO}/${RC_TAG}/Install%20Local%20AI.cmd`;
 // SHA-256 of that exact blob at that exact tag. Verified against the local git
 // object and two independent downloads before it was pinned here.
 const INSTALLER_SHA256 =
@@ -116,6 +120,8 @@ export async function handleDownload(request, ctx, opts) {
   const hit = await cache.match(cacheKey);
   if (hit) {
     const body = await hit.arrayBuffer();
+    const cachedDigest = toHex(await crypto.subtle.digest('SHA-256', body));
+    if (cachedDigest !== expectedSha) return errorResponse(502);
     return new Response(isHead ? null : body, {
       status: 200,
       headers: installerHeaders(body.byteLength),
@@ -165,7 +171,8 @@ export async function handleDownload(request, ctx, opts) {
 
 // Exported for the test suite.
 export const _config = {
-  REPO,
+  PUBLIC_REPO,
+  PINNED_SOURCE_REPO,
   RC_TAG,
   INSTALLER_SOURCE,
   INSTALLER_SHA256,

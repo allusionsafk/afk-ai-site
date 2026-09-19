@@ -117,7 +117,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offs
 .cta-row{display:flex;flex-direction:column;gap:var(--s2);align-items:stretch;margin:0 0 var(--s3)}
 .cta-row .btn.big{width:100%}
 
-/* Friend Beta is a STATE, so it carries the warn token. Colour is never
+/* AFK AI Beta is a STATE, so it carries the warn token. Colour is never
    decoration on this page. */
 .status-chip{display:flex;align-items:center;justify-content:center;gap:9px;
   min-height:var(--tap);padding:0 16px;margin:0;border-radius:9999px;

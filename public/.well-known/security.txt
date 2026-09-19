@@ -1,4 +1,4 @@
-Contact: https://github.com/allusionsafk/localai-windows-starter/security/advisories/new
+Contact: https://github.com/allusionsafk/afk-ai/security/advisories/new
 Expires: 2027-07-11T00:00:00.000Z
 Preferred-Languages: en
-Policy: https://github.com/allusionsafk/localai-windows-starter/security/policy
+Policy: https://github.com/allusionsafk/afk-ai/security/policy
