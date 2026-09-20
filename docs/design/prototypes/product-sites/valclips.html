@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ValClips — product-site prototype</title>
+  <meta name="description" content="ValClips is gameplay-to-clip intelligence built around evidence-aware selection and deliberate rendering.">
+  <link rel="stylesheet" href="product.css">
+</head>
+<body class="valclips-prototype">
+  <header class="product-header wrap">
+    <strong>ValClips</strong>
+    <nav class="product-nav" aria-label="Prototype sections">
+      <a href="#pipeline">Pipeline</a>
+      <a href="#evidence">Evidence</a>
+      <a href="#status">Status</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="product-hero">
+      <div class="wrap product-hero-grid">
+        <div>
+          <p class="eyebrow">Gameplay production / private development</p>
+          <h1>Find the moments worth keeping. Build the clip around the <em>evidence</em>.</h1>
+        </div>
+        <div class="product-hero-copy">
+          <p>ValClips turns long gameplay recordings into candidate moments and rendered vertical clips. The product is built around deciding why a moment belongs, not around pretending every spike in activity is a highlight.</p>
+          <span class="status">In development</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="path-band" id="pipeline" aria-labelledby="pipeline-title">
+      <div class="wrap">
+        <p class="eyebrow" id="pipeline-title">Pipeline / source to clip</p>
+        <div class="path">
+          <div class="path-step"><b>01</b><strong>Observe</strong><p>Read the recording and establish usable media/feed state.</p></div>
+          <div class="path-step"><b>02</b><strong>Detect</strong><p>Find candidate windows without turning backend failure into a confident zero.</p></div>
+          <div class="path-step"><b>03</b><strong>Attribute</strong><p>Resolve player/ownership context when the evidence supports it.</p></div>
+          <div class="path-step"><b>04</b><strong>Select</strong><p>Rank moments using the evidence that survives the pipeline.</p></div>
+          <div class="path-step"><b>05</b><strong>Plan</strong><p>Choose trim, framing, narration/caption, and render policy.</p></div>
+          <div class="path-step"><b>06</b><strong>Render</strong><p>Produce the vertical clip and retain enough provenance to explain it.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="evidence" id="evidence" aria-labelledby="evidence-title">
+      <div class="wrap evidence-grid">
+        <div>
+          <p class="eyebrow">Product proof / future public surface</p>
+          <h2 id="evidence-title">Show the source, the decision, and the output.</h2>
+        </div>
+        <dl class="evidence-list">
+          <div class="evidence-row"><dt>Source</dt><dd>A real gameplay window with enough surrounding context to judge the moment.</dd></div>
+          <div class="evidence-row"><dt>Decision</dt><dd>The candidate/ownership/selection evidence that made this clip eligible.</dd></div>
+          <div class="evidence-row"><dt>Output</dt><dd>The actual rendered vertical clip — not a mockup or editor screenshot.</dd></div>
+          <div class="evidence-row"><dt>Performance</dt><dd>If publication metrics are shown later, include the measurement date and experiment context rather than implying causality.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="boundary" id="status" aria-labelledby="status-title">
+      <div class="wrap boundary-grid">
+        <div>
+          <p class="eyebrow">Current boundary</p>
+          <h2 id="status-title">No public download yet.</h2>
+        </div>
+        <div class="boundary-list">
+          <div class="boundary-item"><strong>Private development</strong><p>The current product repository/build is not a public consumer distribution surface.</p></div>
+          <div class="boundary-item"><strong>No virality promise</strong><p>Observed channel performance can become evidence, but selected examples do not prove causal lift.</p></div>
+          <div class="boundary-item"><strong>Network wording can change</strong><p>Local processing boundaries must be re-audited if OAuth upload or external services become shipping features.</p></div>
+          <div class="boundary-item"><strong>Public proof comes first</strong><p>A real launch should use cleared source/output examples before asking visitors to trust detector claims.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="product-footer wrap">
+    <span>ValClips · product-site prototype</span>
+    <span>Built by Allusions · no public deployment from this file</span>
+  </footer>
+</body>
+</html>

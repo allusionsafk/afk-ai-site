@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DemiMedia · Product-site prototype</title>
+  <meta name="description" content="DemiMedia is a Windows media player that plans playback around the source, hardware and display, then reports what actually ran.">
+  <link rel="stylesheet" href="product.css">
+</head>
+<body class="adaptive-prototype">
+  <header class="product-header wrap">
+    <strong>DemiMedia</strong>
+    <nav class="product-nav" aria-label="Prototype sections">
+      <a href="#path">Playback path</a>
+      <a href="#truth">Runtime truth</a>
+      <a href="#difficult-media">Difficult media</a>
+      <a href="#limits">Limits</a>
+      <a href="https://github.com/allusionsafk/adaptive-media">Development</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="product-hero">
+      <div class="wrap product-hero-grid">
+        <div>
+          <p class="eyebrow">Windows 11 playback / active development</p>
+          <h1>Playback that understands the <em>path</em>, not just the file.</h1>
+        </div>
+        <div class="product-hero-copy">
+          <p>DemiMedia plans playback around the source, your hardware and your display, then tells you what actually ran.</p>
+          <span class="status">In development</span>
+          <p><a href="https://github.com/allusionsafk/adaptive-media">View development ↗</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="path-band" id="path" aria-labelledby="path-title">
+      <div class="wrap">
+        <p class="eyebrow" id="path-title">Playback path / evidence travels with the decision</p>
+        <div class="path">
+          <div class="path-step"><b>01</b><strong>Source</strong><p>Probe container, video profile, timing, audio and difficult-media evidence before planning.</p></div>
+          <div class="path-step"><b>02</b><strong>Decode</strong><p>Choose a supported path for the source and machine rather than blindly forwarding options.</p></div>
+          <div class="path-step"><b>03</b><strong>Render</strong><p>Reference-first design with explicit scaling, cleanup, motion and RTX choices where supported.</p></div>
+          <div class="path-step"><b>04</b><strong>Display</strong><p>Observe presentation state and make fallback visible when the preferred path does not hold.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="evidence" id="truth" aria-labelledby="truth-title">
+      <div class="wrap evidence-grid">
+        <div>
+          <p class="eyebrow">Runtime truth / 004 states</p>
+          <h2 id="truth-title">A requested feature is not reported as active until the runtime proves it.</h2>
+        </div>
+        <dl class="evidence-list">
+          <div class="evidence-row"><dt>Requested</dt><dd>What the user asked for: preset, enhancement, motion, HDR or audio behavior.</dd></div>
+          <div class="evidence-row"><dt>Planned</dt><dd>What DemiMedia selected after looking at source and machine evidence.</dd></div>
+          <div class="evidence-row"><dt>Observed</dt><dd>What the decoder, renderer and presentation path actually reported at runtime.</dd></div>
+          <div class="evidence-row"><dt>Fallback</dt><dd>What changed when the preferred path failed, degraded or could not be proven.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="evidence" id="difficult-media" aria-labelledby="difficult-title">
+      <div class="wrap evidence-grid">
+        <div>
+          <p class="eyebrow">Development proof / native Profile 7</p>
+          <h2 id="difficult-title">Difficult media gets evidence, not a marketing badge.</h2>
+          <p>Experimental native Profile 7 playback has been proven on the closure-qualified development path with separate base- and enhancement-layer hardware decoding and observed FEL composition.</p>
+        </div>
+        <dl class="evidence-list">
+          <div class="evidence-row"><dt>Profile</dt><dd>Dolby Vision P7 FEL</dd></div>
+          <div class="evidence-row"><dt>Decode</dt><dd>BL + EL · d3d11va on the certified development path</dd></div>
+          <div class="evidence-row"><dt>Composition</dt><dd>Observed in the qualified experiment; not a universal-title claim</dd></div>
+          <div class="evidence-row"><dt>Media scratch</dt><dd>0 B during the native direct-playback gate</dd></div>
+        </dl>
+      </div>
+      <div class="wrap"><p class="eyebrow">Development evidence only · not yet a public DemiMedia release · no claim of TV-led Dolby Vision HDMI passthrough.</p></div>
+    </section>
+
+    <section class="boundary" id="limits" aria-labelledby="limits-title">
+      <div class="wrap boundary-grid">
+        <div>
+          <p class="eyebrow">Measured boundary</p>
+          <h2 id="limits-title">Strong claims stop where the evidence stops.</h2>
+        </div>
+        <div class="boundary-list">
+          <div class="boundary-item"><strong>Reference-first, not Reference-by-default</strong><p>A dedicated Reference preset exists, but the current UI default/first selection is Automatic. Optional processing remains explicit.</p></div>
+          <div class="boundary-item"><strong>Compatibility export is separate</strong><p>P7→P8.1 export is a compatibility operation rather than the playback path. FEL export discards FEL picture contribution and must say so.</p></div>
+          <div class="boundary-item"><strong>Hardware chains vary</strong><p>HDR switching, bitstream/Atmos, RTX paths, decode and renderer behavior depend on the hardware/display/receiver chain.</p></div>
+          <div class="boundary-item"><strong>No current download</strong><p>The standalone repository has no DemiMedia release yet. Historical Adaptive Media prereleases are provenance, not the current product build.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="product-footer wrap">
+    <span>DemiMedia · product-site prototype</span>
+    <span>Built by <a href="https://allusions-site.pages.dev/">Allusions</a> · no public deployment from this file</span>
+  </footer>
+</body>
+</html>
