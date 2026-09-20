@@ -28,6 +28,10 @@ check('AFK AI is named before Allusions in visible content', text.indexOf('AFK A
 check('homepage keeps the pinned Beta version visible', /Beta[\s\S]{0,160}0\.1\.7rc1|0\.1\.7rc1[\s\S]{0,160}Beta/i.test(source));
 check('homepage has at least two direct download calls to action', (source.match(/href=["']\/download["']/g) || []).length >= 2);
 check('maker attribution is subordinate and explicit', /Built by\s+<a[^>]*>Allusions<\/a>/i.test(source));
+check('maker attribution points to the Allusions site',
+  /Built by\s+<a\b[^>]*href=["']https:\/\/allusions-site\.pages\.dev\/["'][^>]*>Allusions<\/a>/i.test(source));
+check('header maker attribution uses the same site',
+  /class=["']registration-note["'][^>]*>[\s\S]*?Built by\s+<a\b[^>]*href=["']https:\/\/allusions-site\.pages\.dev\/["'][^>]*>Allusions<\/a>/i.test(source));
 check('legacy Friend Beta wording is absent', !/Friend Beta/i.test(source));
 
 console.log('Case H2 - maturity and evidence structure:');

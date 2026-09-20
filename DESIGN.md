@@ -161,7 +161,7 @@ Visual changes should not weaken the Content Security Policy.
 
 AFK AI owns the page. Allusions appears only as a quiet maker attribution.
 
-The maker link should point to the real Allusions studio site once that production URL exists and has been verified. Until then, do not create a fake destination.
+Maker attribution links to the Allusions site at `https://allusions-site.pages.dev/`.
 
 ## Review checklist
 
