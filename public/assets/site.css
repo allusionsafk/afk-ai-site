@@ -398,6 +398,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offs
 .final-action>p:first-child{max-width:48ch;margin:0 0 24px;color:color-mix(in srgb,var(--bg) 76%,transparent);line-height:1.6}
 .final-section .btn.primary{background:var(--bg);color:var(--text);border-color:var(--bg)}
 .final-section .btn.primary:hover{background:#fff;color:#111;border-color:#fff}
+.final-section .download-filename{margin:16px 0 0;color:color-mix(in srgb,var(--bg) 76%,transparent);font-size:.74rem;overflow-wrap:anywhere}
 .final-section .requirements{color:color-mix(in srgb,var(--bg) 70%,transparent)}
 .final-section .requirements span{border-color:color-mix(in srgb,var(--bg) 38%,transparent)}
 

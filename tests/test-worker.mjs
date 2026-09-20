@@ -5,13 +5,13 @@ import { fileURLToPath } from 'node:url';
 import worker, { handleDownload, _config } from '../worker.js';
 
 const ctx = { waitUntil() {} };
-let cacheStore = null;
+let cacheStore = new Map();
 function resetCache() {
-  cacheStore = null;
+  cacheStore = new Map();
   globalThis.caches = {
     default: {
-      async match() { return cacheStore; },
-      async put(_key, res) { cacheStore = res; },
+      async match(key) { return cacheStore.get(key.url)?.clone() ?? null; },
+      async put(key, res) { cacheStore.set(key.url, res); },
     },
   };
 }
@@ -22,15 +22,15 @@ async function sha256Hex(bytes) {
   return [...new Uint8Array(d)].map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 function upstreamOk(bytes) {
-  return async () => ({ ok: true, status: 200, async arrayBuffer() { return bytes.buffer ?? bytes; } });
+  return async () => new Response(bytes, { status: 200, headers: { 'content-length': String(bytes.length) } });
 }
 
 let pass = 0, fail = 0;
 function check(name, cond) { (cond ? (pass++, console.log('  ok  ' + name)) : (fail++, console.log('FAIL  ' + name))); }
 
-const PAYLOAD = enc.encode('@echo off\r\nrem pretend installer\r\n');
+const PAYLOAD = enc.encode('MZ pretend EXE installer');
 const GOOD_SHA = await sha256Hex(PAYLOAD);
-const OPTS = { sourceUrl: 'https://upstream.test/Install.cmd', expectedSha: GOOD_SHA };
+const OPTS = { sourceUrl: 'https://upstream.test/AFKLocalAISetup-0.2.0-rc1-x64.exe', expectedSha: GOOD_SHA, expectedLength: PAYLOAD.length };
 
 // --- Case 1: verified installer is served as a real download ---
 resetCache();
@@ -42,7 +42,7 @@ check('status 200', res.status === 200);
 check('octet-stream (forces a download, not a text page)',
   res.headers.get('content-type') === 'application/octet-stream');
 check('attachment disposition', (res.headers.get('content-disposition') || '').startsWith('attachment;'));
-check('filename is the product name', res.headers.get('content-disposition') === 'attachment; filename="Install AFK AI.cmd"');
+check('filename is the exact release asset', res.headers.get('content-disposition') === 'attachment; filename="AFKLocalAISetup-0.2.0-rc1-x64.exe"');
 check('content-length matches payload', res.headers.get('content-length') === String(PAYLOAD.length));
 check('bytes served are the upstream bytes', body.length === PAYLOAD.length && body.every((b, i) => b === PAYLOAD[i]));
 check('nosniff header', res.headers.get('x-content-type-options') === 'nosniff');
@@ -50,14 +50,21 @@ check('x-frame-options DENY', res.headers.get('x-frame-options') === 'DENY');
 
 // --- Case 2: tampered upstream must fail CLOSED ---
 resetCache();
-globalThis.fetch = upstreamOk(enc.encode('@echo off\r\nrem TAMPERED\r\n'));
+globalThis.fetch = upstreamOk(enc.encode('MZ TAMPERED'));
 res = await handleDownload(new Request('https://site/download'), ctx, OPTS);
 let text = await res.text();
 console.log('Case 2 — tampered upstream:');
 check('status 502', res.status === 502);
 check('no installer bytes served', text.indexOf('TAMPERED') === -1);
 check('generic error shape only', text === JSON.stringify({ error: 'installer_unavailable' }));
-check('not cached', cacheStore === null);
+check('not cached', cacheStore.size === 0);
+
+// --- Case 2b: matching digest with a wrong byte length still fails closed ---
+resetCache();
+globalThis.fetch = upstreamOk(PAYLOAD);
+res = await handleDownload(new Request('https://site/download'), ctx, { ...OPTS, expectedLength: PAYLOAD.length + 1 });
+check('wrong byte length is refused', res.status === 502);
+check('wrong byte length is not cached', cacheStore.size === 0);
 
 // --- Case 3: upstream unavailable ---
 resetCache();
@@ -87,12 +94,29 @@ check('body empty', (await res.arrayBuffer()).byteLength === 0);
 resetCache();
 globalThis.fetch = upstreamOk(PAYLOAD);
 await handleDownload(new Request('https://site/download?a=1'), ctx, OPTS);
-let cachedUnder = cacheStore ? 'stored' : 'missing';
+let cachedUnder = cacheStore.size ? 'stored' : 'missing';
 globalThis.fetch = async () => { throw new Error('upstream must not be hit on a cache hit'); };
 res = await handleDownload(new Request('https://site/download?b=2'), ctx, OPTS);
 console.log('Case 6 — cache key normalization:');
 check('first request cached', cachedUnder === 'stored');
 check('different query served from cache without hitting upstream', res.status === 200);
+
+// --- Case 6b: a cache entry from a previous installer pin cannot be reused ---
+const previousBody = enc.encode('old installer');
+const previousSha = await sha256Hex(previousBody);
+globalThis.fetch = upstreamOk(previousBody);
+res = await handleDownload(new Request('https://site/download'), ctx,
+  { ...OPTS, expectedSha: previousSha, expectedLength: previousBody.length });
+check('new digest uses a distinct cache key', new TextDecoder().decode(await res.arrayBuffer()) === 'old installer');
+
+// --- Case 6c: a damaged cache entry must fail closed ---
+resetCache();
+globalThis.fetch = upstreamOk(PAYLOAD);
+await handleDownload(new Request('https://site/download'), ctx, OPTS);
+for (const key of cacheStore.keys()) cacheStore.set(key, new Response(enc.encode('corrupt cached bytes')));
+globalThis.fetch = async () => { throw new Error('cache hit must not fetch upstream'); };
+res = await handleDownload(new Request('https://site/download'), ctx, OPTS);
+check('corrupt cached bytes are refused', res.status === 502);
 
 // --- Case 7: method gate on the route ---
 resetCache();
@@ -112,17 +136,18 @@ const src = readFileSync(fileURLToPath(new URL('../worker.js', import.meta.url))
 const html = readFileSync(fileURLToPath(new URL('../public/index.html', import.meta.url)), 'utf8');
 const appjs = readFileSync(fileURLToPath(new URL('../public/assets/app.js', import.meta.url)), 'utf8');
 console.log('Case 9 — release pin truth:');
-check('RC tag is v0.1.7rc1', _config.RC_TAG === 'v0.1.7rc1');
-check('installer source points at that tag', _config.INSTALLER_SOURCE.includes('/v0.1.7rc1/'));
-check('installer source is the raw tag blob', _config.INSTALLER_SOURCE ===
-  'https://raw.githubusercontent.com/allusionsafk/localai-windows-starter/v0.1.7rc1/Install%20Local%20AI.cmd');
+check('RC tag is v0.2.0-rc1', _config.RC_TAG === 'v0.2.0-rc1');
+check('installer source is the exact public release asset', _config.INSTALLER_SOURCE ===
+  'https://github.com/allusionsafk/afk-ai/releases/download/v0.2.0-rc1/AFKLocalAISetup-0.2.0-rc1-x64.exe');
+check('pinned byte length is the certified length', _config.INSTALLER_BYTES === 58367121);
+check('pinned digest is the certified digest', _config.INSTALLER_SHA256 === 'e380aa5c70bc4820df9f6c93e9d0602a3e9d0df501586090facb67c4f7c7447a');
 check('pinned sha256 is 64 lowercase hex', /^[0-9a-f]{64}$/.test(_config.INSTALLER_SHA256));
 check('worker.js never calls releases/latest', !/releases\/latest/.test(src.replace(/^\s*\/\/.*$/gm, '')));
 check('worker.js never calls the releases API', !/api\.github\.com/.test(src.replace(/^\s*\/\/.*$/gm, '')));
 check('app.js has no release fetching', !/api\/release|releases\/latest/.test(appjs));
 check('index.html has no releases/latest link', !/releases\/latest/.test(html));
 check('index.html CTA points at /download', /href="\/download"/.test(html));
-check('index.html shows the beta version', /0\.1\.7rc1/.test(html));
+check('index.html shows the beta version', /0\.2\.0-rc1/.test(html));
 check('index.html never claims a stable release', !/\bstable release\b|\bproduction release\b/i.test(html));
 
 console.log('\n' + pass + ' passed, ' + fail + ' failed');

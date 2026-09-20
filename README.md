@@ -1,6 +1,6 @@
 # AFK AI website
 
-Public landing page and download route for [AFK AI for Windows](https://github.com/allusionsafk/localai-windows-starter).
+Public landing page and download route for [AFK AI for Windows](https://github.com/allusionsafk/afk-ai).
 
 **Live site:** https://localai-windows-starter-site.allusionsafk.workers.dev/
 
@@ -14,9 +14,9 @@ The site uses static HTML, CSS, and JavaScript plus one Cloudflare Worker route 
 |---|---|
 | Homepage | Static. No accounts, forms, or analytics |
 | Download route | `/download` |
-| Pinned candidate | AFK AI Beta `0.1.7rc1` |
-| Integrity | SHA-256 checked before installer bytes are returned |
-| Failure mode | Refuse the download on upstream or hash mismatch |
+| Pinned prerelease | AFK AI Beta `v0.2.0-rc1`, `AFKLocalAISetup-0.2.0-rc1-x64.exe` |
+| Integrity | SHA-256 and byte length checked before installer bytes are returned |
+| Failure mode | Refuse the download on upstream, length, or hash mismatch |
 | Version authority | Website pin, not `releases/latest` |
 
 The repository also serves a legacy media page under `/adaptive-media/`. It does not control the AFK AI download route. Public product naming for that project is now **DemiMedia**; the legacy path remains for compatibility until the dedicated DemiMedia site is launched.
@@ -63,9 +63,9 @@ A repository commit does not prove that the live Cloudflare deployment changed. 
 
 For `GET` or `HEAD` requests to `/download`, `worker.js`:
 
-1. fetches the installer from the exact pinned tag
-2. computes SHA-256 over the returned bytes
-3. compares it with the committed digest
+1. fetches the EXE from the exact pinned GitHub prerelease asset
+2. computes SHA-256 and checks the byte length of the returned bytes
+3. compares both with the committed values
 4. serves the file only on an exact match
 5. refuses the request if retrieval or verification fails
 

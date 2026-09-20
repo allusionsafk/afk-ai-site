@@ -5,40 +5,31 @@
 // route, /download, and delegates everything else to assets.
 //
 // WHY /download EXISTS
-// The friend beta is distributed from a PINNED TAG, not from a GitHub Release.
-// An earlier /api/release route resolved dynamically through the Releases API,
-// which made AFK AI delivery depend on whatever release GitHub considered
-// current rather than on the reviewed Friend Beta candidate. That mechanism is
-// gone. Nothing on this site consults releases/latest, and releases for other
-// work in the starter repository do not change the AFK AI download pin.
+// The Beta installer is fetched from one exact GitHub prerelease asset.
+// Nothing here consults releases/latest or selects an asset dynamically.
 //
-// Serving (rather than redirecting to raw.githubusercontent.com) is deliberate:
-// raw responds text/plain, so a browser DISPLAYS the installer as source
-// instead of downloading it. Proxying lets us set a real attachment
-// disposition, give the file its product name, and verify the bytes first.
+// Serving through the Worker lets us verify the bytes before returning them
+// and set an explicit attachment filename.
 //
 // Hardening:
 //   - GET/HEAD only; other methods => 405.
-//   - the payload is checked against a pinned SHA-256 before it is served.
+//   - the payload is checked against pinned length and SHA-256 before serving.
 //     A mismatch fails CLOSED (502) rather than shipping unverified bytes.
 //   - cache key is normalized (query string stripped) so `?x=1` cache-busting
 //     cannot bypass the edge cache and hammer the upstream.
 //   - generic error shape only; upstream error details are never echoed.
 
-const REPO = 'allusionsafk/localai-windows-starter';
+const REPO = 'allusionsafk/afk-ai';
 
-// The frozen friend-beta candidate. Bumping the beta means changing these three
-// lines and nothing else.
-const RC_TAG = 'v0.1.7rc1';
+// The exact published asset was independently downloaded and compared with the
+// candidate workflow's certified bytes before this pin was changed.
+const RC_TAG = 'v0.2.0-rc1';
+const DOWNLOAD_FILENAME = 'AFKLocalAISetup-0.2.0-rc1-x64.exe';
 const INSTALLER_SOURCE =
-  `https://raw.githubusercontent.com/${REPO}/${RC_TAG}/Install%20Local%20AI.cmd`;
-// SHA-256 of that exact blob at that exact tag. Verified against the local git
-// object and two independent downloads before it was pinned here.
+  `https://github.com/${REPO}/releases/download/${RC_TAG}/${DOWNLOAD_FILENAME}`;
 const INSTALLER_SHA256 =
-  '767e4f603c79c21ce9bebc01d42241d7b84ff9728c12fb13c43fff4d51c24356';
-
-// What the visitor's browser saves it as. The product is "AFK AI".
-const DOWNLOAD_FILENAME = 'Install AFK AI.cmd';
+  'e380aa5c70bc4820df9f6c93e9d0602a3e9d0df501586090facb67c4f7c7447a';
+const INSTALLER_BYTES = 58367121;
 
 const UPSTREAM_TIMEOUT_MS = 15000;
 
@@ -105,17 +96,23 @@ export default {
 export async function handleDownload(request, ctx, opts) {
   const sourceUrl = (opts && opts.sourceUrl) || INSTALLER_SOURCE;
   const expectedSha = (opts && opts.expectedSha) || INSTALLER_SHA256;
+  const expectedLength = (opts && opts.expectedLength) ?? INSTALLER_BYTES;
   const isHead = request.method === 'HEAD';
 
-  // Edge cache, keyed without the query string.
+  // The digest separates this release from bytes cached under older pins.
+  // Visitor query strings do not create separate cache entries.
   const cache = caches.default;
   const keyUrl = new URL(request.url);
-  keyUrl.search = '';
+  keyUrl.search = `?sha256=${expectedSha}`;
   const cacheKey = new Request(keyUrl.toString(), { method: 'GET' });
 
   const hit = await cache.match(cacheKey);
   if (hit) {
-    const body = await hit.arrayBuffer();
+    let body;
+    try { body = await hit.arrayBuffer(); } catch (e) { return errorResponse(502); }
+    if (!(await hasExpectedIdentity(body, expectedLength, expectedSha))) {
+      return errorResponse(502);
+    }
     return new Response(isHead ? null : body, {
       status: 200,
       headers: installerHeaders(body.byteLength),
@@ -144,8 +141,7 @@ export async function handleDownload(request, ctx, opts) {
 
   // Integrity gate. An upstream that has been tampered with, truncated, or
   // silently repointed must not reach a visitor's machine as an executable.
-  const digest = toHex(await crypto.subtle.digest('SHA-256', bytes));
-  if (digest !== expectedSha) {
+  if (!(await hasExpectedIdentity(bytes, expectedLength, expectedSha))) {
     return errorResponse(502);
   }
 
@@ -163,11 +159,17 @@ export async function handleDownload(request, ctx, opts) {
   });
 }
 
+async function hasExpectedIdentity(bytes, length, sha256) {
+  return bytes.byteLength === length &&
+    toHex(await crypto.subtle.digest('SHA-256', bytes)) === sha256;
+}
+
 // Exported for the test suite.
 export const _config = {
   REPO,
   RC_TAG,
   INSTALLER_SOURCE,
   INSTALLER_SHA256,
+  INSTALLER_BYTES,
   DOWNLOAD_FILENAME,
 };
