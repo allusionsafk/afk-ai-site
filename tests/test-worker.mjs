@@ -1,6 +1,6 @@
 // Unit-test worker.js handleDownload() with mocked Cloudflare runtime globals.
 // Run via `npm test` (from the repo root, so the relative import resolves).
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import worker, { handleDownload, _config } from '../worker.js';
 
@@ -134,7 +134,9 @@ check('non-/download served by ASSETS', (await res.text()) === 'asset');
 // --- Case 9: the pin itself, and no releases/latest anywhere ---
 const src = readFileSync(fileURLToPath(new URL('../worker.js', import.meta.url)), 'utf8');
 const html = readFileSync(fileURLToPath(new URL('../public/index.html', import.meta.url)), 'utf8');
-const appjs = readFileSync(fileURLToPath(new URL('../public/assets/app.js', import.meta.url)), 'utf8');
+// The homepage ships no JavaScript; if a script comes back, it is held to the same rule.
+const appjsPath = fileURLToPath(new URL('../public/assets/app.js', import.meta.url));
+const appjs = existsSync(appjsPath) ? readFileSync(appjsPath, 'utf8') : '';
 console.log('Case 9 — release pin truth:');
 check('RC tag is v0.2.0-rc1', _config.RC_TAG === 'v0.2.0-rc1');
 check('installer source is the exact public release asset', _config.INSTALLER_SOURCE ===

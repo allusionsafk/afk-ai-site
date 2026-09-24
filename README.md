@@ -6,7 +6,7 @@ Public landing page and download route for [AFK AI for Windows](https://github.c
 
 [Product](PRODUCT.md) | [Design](DESIGN.md) | [Support](SUPPORT.md) | [Security](SECURITY.md) | [Contributing](CONTRIBUTING.md)
 
-The site uses static HTML, CSS, and JavaScript plus one Cloudflare Worker route for the pinned AFK AI Beta installer.
+The site uses static HTML and CSS (no JavaScript on the homepage) plus one Cloudflare Worker route for the pinned AFK AI Beta installer.
 
 ## Public behaviour
 

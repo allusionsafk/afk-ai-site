@@ -1,8 +1,8 @@
 # Security headers, applied at the edge to every static response.
 # CSP notes:
-#   script-src 'self'  — all JS is in /assets/app.js; no inline <script>.
-#   style-src  'self'  — all CSS is in /assets/site.css; no <style> blocks and
-#                        no style="" attributes anywhere (including JS-built markup).
+#   script-src 'self'  — the pages ship no JavaScript; any script must be a same-origin file.
+#   style-src  'self'  — CSS lives in /assets/afk.css (homepage) and /assets/site.css (legacy
+#                        media page); no <style> blocks and no style="" attributes.
 #   font-src   'self'  — fonts are self-hosted woff2 in /assets/fonts/.
 #   connect-src 'self' — the page makes no fetch() calls at all.
 #   Zero third-party origins.

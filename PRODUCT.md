@@ -65,14 +65,14 @@ Current product behaviour includes:
 
 ## Visual direction
 
-The deployed B2 homepage uses a restrained instrument/editorial system in light and dark mode:
+The homepage is a warm local workbench in the AFK AI app's own light palette (details in DESIGN.md):
 
-- Bricolage Grotesque display typography
-- IBM Plex Mono for evidence/status labels
-- ruled sections and hanging notation
-- semantic setup/runtime figures rather than fabricated UI
-- paper-like light surfaces and dark proof bands
-- explicit separation of shipping behavior, Beta limits, and development direction
+- real, dated captures of the app's windows on a warm material bench, with provenance, rather than mock-ups or figures standing in for the UI
+- Bricolage Grotesque headings shared with the ALLUSIONS family, Windows UI body text
+- IBM Plex Mono only for machine strings: version, installer filename, build IDs
+- one dark primary action per region, and one ink band closing the page with the final download
+- separate sections for shipping behavior, Beta limits, and development direction
+- static HTML and CSS with no JavaScript on the homepage
 
 Avoid decorative dashboards, glass effects, heavy gradients, fake technical styling, and visual elements that imply unsupported functionality.
 
