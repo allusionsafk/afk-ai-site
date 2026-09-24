@@ -28,7 +28,8 @@ function check(name, condition, detail = '') {
 console.log('Case H1 - product hierarchy and conversion:');
 const h1s = [...source.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)];
 check('homepage has exactly one h1', h1s.length === 1, String(h1s.length));
-check('AFK AI is named before Allusions in visible content', text.indexOf('AFK AI') >= 0 && text.indexOf('AFK AI') < text.indexOf('Allusions'));
+check('AFK AI is named before Allusions in visible content',
+  text.indexOf('AFK AI') >= 0 && text.toLowerCase().indexOf('allusions') > text.indexOf('AFK AI'));
 check('homepage keeps the pinned Beta version visible', /Beta[\s\S]{0,160}0\.2\.0-rc1|0\.2\.0-rc1[\s\S]{0,160}Beta/i.test(source));
 check('homepage describes the native Windows app', /native Windows app/i.test(text));
 check('homepage names the exact EXE download', /AFKLocalAISetup-0\.2\.0-rc1-x64\.exe/.test(text));
