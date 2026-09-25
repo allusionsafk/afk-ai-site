@@ -98,7 +98,8 @@ const subresource = [...htmlNoComments.matchAll(/\b(?:src|href)=["'](https?:\/\/
   .filter((m) => !/<a\b[^>]*$/i.test(htmlNoComments.slice(0, m.index)))
   .map((m) => m[1]);
 const remoteSubresources = subresource.filter(
-  (u) => !u.startsWith('https://localai-windows-starter-site.')
+  (u) => !u.startsWith('https://localai-windows-starter-site.') &&
+    !u.startsWith('https://allusions.pages.dev/ai/') // canonical / og:url on the public route
 );
 check('no remote stylesheet/script/image/font subresources', remoteSubresources.length === 0, String(remoteSubresources));
 check('no @import in the stylesheet', !/@import/i.test(cssNoComments));
