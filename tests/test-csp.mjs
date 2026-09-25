@@ -7,7 +7,7 @@
 // asset, and the page renders wrong for every visitor with no build error.
 //
 // Run via `npm test` (which runs this after the Worker suite).
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -20,8 +20,10 @@ const htmlPages = [
   ['adaptive-media/index.html', read('public/adaptive-media/index.html')],
 ];
 const html = htmlPages.map(([name, source]) => `<!-- ${name} -->\n${source}`).join('\n');
-const css = read('public/assets/site.css');
-const appJs = read('public/assets/app.js');
+// Every stylesheet the pages link: the homepage has its own; the legacy media page keeps site.css.
+const css = ['public/assets/site.css', 'public/assets/afk.css'].map(read).join('\n');
+// The homepage ships no JavaScript. If a script is ever added again, it is checked here.
+const appJs = existsSync(join(root, 'public/assets/app.js')) ? read('public/assets/app.js') : '';
 
 let pass = 0;
 let fail = 0;

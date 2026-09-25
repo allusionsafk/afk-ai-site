@@ -1,49 +1,42 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-07-24T00:00:00Z",
-  "title": "Design System: AFK-LocalAI site",
+  "generatedAt": "2026-09-24T00:00:00Z",
+  "title": "Design System: AFK AI site",
   "extensions": {
     "colorMeta": {
-      "accent-blue": { "role": "primary", "displayName": "Accent Blue", "canonical": "#2563eb", "tonalRamp": ["oklch(20% 0.09 262)", "oklch(30% 0.13 262)", "oklch(40% 0.17 262)", "oklch(50% 0.19 262)", "oklch(58% 0.19 262)", "oklch(70% 0.14 262)", "oklch(84% 0.08 262)", "oklch(95% 0.03 262)"] },
-      "accent-blue-dark": { "role": "primary", "displayName": "Accent Blue (dark theme)", "canonical": "#7aa2ff", "tonalRamp": ["oklch(24% 0.08 265)", "oklch(36% 0.11 265)", "oklch(48% 0.14 265)", "oklch(60% 0.15 265)", "oklch(72% 0.13 265)", "oklch(80% 0.10 265)", "oklch(88% 0.06 265)", "oklch(96% 0.02 265)"] },
-      "signal-emerald": { "role": "secondary", "displayName": "Signal Emerald", "canonical": "#10b981", "tonalRamp": ["oklch(22% 0.06 165)", "oklch(34% 0.09 165)", "oklch(46% 0.11 165)", "oklch(58% 0.13 165)", "oklch(70% 0.14 165)", "oklch(80% 0.12 165)", "oklch(90% 0.07 165)", "oklch(97% 0.02 165)"] },
-      "signal-emerald-dark": { "role": "secondary", "displayName": "Signal Emerald (dark theme)", "canonical": "#5eead4", "tonalRamp": ["oklch(24% 0.05 175)", "oklch(38% 0.07 175)", "oklch(52% 0.09 175)", "oklch(66% 0.11 175)", "oklch(78% 0.12 175)", "oklch(86% 0.10 175)", "oklch(92% 0.07 175)", "oklch(97% 0.03 175)"] },
-      "day-sky": { "role": "neutral", "displayName": "Day Sky", "canonical": "#f6f8fc", "tonalRamp": ["oklch(18% 0.01 255)", "oklch(30% 0.01 255)", "oklch(45% 0.01 255)", "oklch(60% 0.01 255)", "oklch(75% 0.008 255)", "oklch(86% 0.007 255)", "oklch(93% 0.006 255)", "oklch(98% 0.004 255)"] },
-      "night-sky": { "role": "neutral", "displayName": "Night Sky", "canonical": "#090d18", "tonalRamp": ["oklch(13% 0.02 262)", "oklch(18% 0.02 262)", "oklch(25% 0.02 262)", "oklch(35% 0.02 262)", "oklch(50% 0.02 262)", "oklch(65% 0.015 262)", "oklch(80% 0.01 262)", "oklch(93% 0.005 262)"] },
-      "day-ink": { "role": "neutral", "displayName": "Day Ink", "canonical": "#0a0c14", "tonalRamp": ["oklch(12% 0.01 262)", "oklch(20% 0.01 262)", "oklch(32% 0.01 262)", "oklch(45% 0.01 262)", "oklch(58% 0.01 262)", "oklch(72% 0.008 262)", "oklch(85% 0.006 262)", "oklch(95% 0.004 262)"] },
-      "night-ink": { "role": "neutral", "displayName": "Night Ink", "canonical": "#eef2ff", "tonalRamp": ["oklch(15% 0.01 265)", "oklch(28% 0.01 265)", "oklch(42% 0.01 265)", "oklch(56% 0.01 265)", "oklch(70% 0.01 265)", "oklch(82% 0.01 265)", "oklch(90% 0.01 265)", "oklch(97% 0.008 265)"] },
-      "day-muted": { "role": "neutral", "displayName": "Day Muted", "canonical": "#5b6980", "tonalRamp": ["oklch(16% 0.015 255)", "oklch(26% 0.02 255)", "oklch(36% 0.025 255)", "oklch(48% 0.025 255)", "oklch(58% 0.02 255)", "oklch(70% 0.02 255)", "oklch(82% 0.015 255)", "oklch(94% 0.008 255)"] },
-      "night-muted": { "role": "neutral", "displayName": "Night Muted", "canonical": "#94a3b8", "tonalRamp": ["oklch(18% 0.015 255)", "oklch(30% 0.02 255)", "oklch(42% 0.02 255)", "oklch(54% 0.02 255)", "oklch(66% 0.02 255)", "oklch(74% 0.02 255)", "oklch(84% 0.015 255)", "oklch(95% 0.008 255)"] },
-      "day-line": { "role": "neutral", "displayName": "Day Line", "canonical": "#dbe4f0", "tonalRamp": ["oklch(20% 0.01 255)", "oklch(34% 0.015 255)", "oklch(48% 0.02 255)", "oklch(62% 0.02 255)", "oklch(74% 0.02 255)", "oklch(84% 0.02 255)", "oklch(91% 0.015 255)", "oklch(97% 0.008 255)"] },
-      "night-line": { "role": "neutral", "displayName": "Night Line", "canonical": "#253049", "tonalRamp": ["oklch(16% 0.02 262)", "oklch(24% 0.03 262)", "oklch(32% 0.035 262)", "oklch(44% 0.035 262)", "oklch(56% 0.03 262)", "oklch(70% 0.025 262)", "oklch(83% 0.015 262)", "oklch(94% 0.008 262)"] },
-      "day-panel": { "role": "neutral", "displayName": "Day Panel", "canonical": "#ffffff", "tonalRamp": ["oklch(20% 0 0)", "oklch(35% 0 0)", "oklch(50% 0 0)", "oklch(65% 0 0)", "oklch(78% 0 0)", "oklch(88% 0 0)", "oklch(95% 0 0)", "oklch(100% 0 0)"] },
-      "day-panel-2": { "role": "neutral", "displayName": "Day Panel 2", "canonical": "#f3f6fb", "tonalRamp": ["oklch(20% 0.006 255)", "oklch(34% 0.006 255)", "oklch(48% 0.006 255)", "oklch(62% 0.006 255)", "oklch(76% 0.006 255)", "oklch(87% 0.005 255)", "oklch(94% 0.005 255)", "oklch(98% 0.004 255)"] },
-      "night-panel": { "role": "neutral", "displayName": "Night Panel", "canonical": "#0f1627", "tonalRamp": ["oklch(14% 0.025 262)", "oklch(19% 0.028 262)", "oklch(26% 0.03 262)", "oklch(36% 0.03 262)", "oklch(50% 0.025 262)", "oklch(66% 0.02 262)", "oklch(81% 0.012 262)", "oklch(94% 0.006 262)"] },
-      "night-panel-2": { "role": "neutral", "displayName": "Night Panel 2", "canonical": "#121b30", "tonalRamp": ["oklch(15% 0.03 262)", "oklch(20% 0.032 262)", "oklch(28% 0.034 262)", "oklch(38% 0.032 262)", "oklch(52% 0.028 262)", "oklch(68% 0.02 262)", "oklch(82% 0.012 262)", "oklch(94% 0.006 262)"] },
-      "code-well": { "role": "neutral", "displayName": "Code Well", "canonical": "#0b1020", "tonalRamp": ["oklch(13% 0.03 265)", "oklch(18% 0.035 265)", "oklch(26% 0.04 265)", "oklch(36% 0.04 265)", "oklch(50% 0.035 265)", "oklch(66% 0.025 265)", "oklch(80% 0.015 265)", "oklch(93% 0.008 265)"] },
-      "code-comment": { "role": "neutral", "displayName": "Code Comment", "canonical": "#7f8db0", "tonalRamp": ["oklch(18% 0.02 265)", "oklch(30% 0.03 265)", "oklch(42% 0.04 265)", "oklch(54% 0.04 265)", "oklch(64% 0.04 265)", "oklch(74% 0.03 265)", "oklch(85% 0.02 265)", "oklch(95% 0.01 265)"] },
-      "code-text": { "role": "neutral", "displayName": "Code Text", "canonical": "#e6ecff", "tonalRamp": ["oklch(16% 0.02 265)", "oklch(30% 0.025 265)", "oklch(44% 0.03 265)", "oklch(58% 0.03 265)", "oklch(72% 0.025 265)", "oklch(84% 0.02 265)", "oklch(92% 0.015 265)", "oklch(97% 0.01 265)"] },
-      "copy-done": { "role": "secondary", "displayName": "Copy Done Green", "canonical": "#22c55e", "tonalRamp": ["oklch(22% 0.07 150)", "oklch(34% 0.10 150)", "oklch(46% 0.13 150)", "oklch(58% 0.16 150)", "oklch(70% 0.17 150)", "oklch(80% 0.14 150)", "oklch(90% 0.09 150)", "oklch(97% 0.03 150)"] },
-      "footage-red": { "role": "tertiary", "displayName": "Footage Red", "canonical": "#ef4444", "tonalRamp": ["oklch(24% 0.09 25)", "oklch(36% 0.13 25)", "oklch(48% 0.17 25)", "oklch(60% 0.20 25)", "oklch(68% 0.19 25)", "oklch(78% 0.14 25)", "oklch(88% 0.08 25)", "oklch(96% 0.03 25)"] }
+      "paper": { "role": "neutral", "displayName": "Warm Paper", "canonical": "#f8f7f3", "tonalRamp": ["oklch(15% 0.005 95)", "oklch(25% 0.005 95)", "oklch(35% 0.005 95)", "oklch(48% 0.005 95)", "oklch(62% 0.005 95)", "oklch(76% 0.005 95)", "oklch(88% 0.005 95)", "oklch(97.6% 0.005 95)"] },
+      "material": { "role": "neutral", "displayName": "Bench Material", "canonical": "#eee8dc", "tonalRamp": ["oklch(15% 0.017 85)", "oklch(25% 0.017 85)", "oklch(35% 0.017 85)", "oklch(48% 0.017 85)", "oklch(62% 0.017 85)", "oklch(76% 0.017 85)", "oklch(88% 0.017 85)", "oklch(93.2% 0.017 85)"] },
+      "ink": { "role": "primary", "displayName": "Workbench Ink", "canonical": "#1f211d", "tonalRamp": ["oklch(15% 0.008 129)", "oklch(24.4% 0.008 129)", "oklch(35% 0.008 129)", "oklch(48% 0.008 129)", "oklch(62% 0.008 129)", "oklch(76% 0.008 129)", "oklch(88% 0.008 129)", "oklch(96% 0.008 129)"] },
+      "ink-raised": { "role": "primary", "displayName": "Raised Ink", "canonical": "#3a3d36", "tonalRamp": ["oklch(15% 0.013 126)", "oklch(25% 0.013 126)", "oklch(35.5% 0.013 126)", "oklch(48% 0.013 126)", "oklch(62% 0.013 126)", "oklch(76% 0.013 126)", "oklch(88% 0.013 126)", "oklch(96% 0.013 126)"] },
+      "support": { "role": "neutral", "displayName": "Support Ink", "canonical": "#5f625a", "tonalRamp": ["oklch(15% 0.013 124)", "oklch(25% 0.013 124)", "oklch(35% 0.013 124)", "oklch(49.1% 0.013 124)", "oklch(62% 0.013 124)", "oklch(76% 0.013 124)", "oklch(88% 0.013 124)", "oklch(96% 0.013 124)"] },
+      "separator": { "role": "neutral", "displayName": "Quiet Separator", "canonical": "#d5d3ca", "tonalRamp": ["oklch(15% 0.012 96)", "oklch(25% 0.012 96)", "oklch(35% 0.012 96)", "oklch(48% 0.012 96)", "oklch(62% 0.012 96)", "oklch(76% 0.012 96)", "oklch(86.6% 0.012 96)", "oklch(96% 0.012 96)"] },
+      "focus": { "role": "tertiary", "displayName": "Workbench Blue", "canonical": "#435f8d", "tonalRamp": ["oklch(15% 0.082 260)", "oklch(25% 0.082 260)", "oklch(35% 0.082 260)", "oklch(48.4% 0.082 260)", "oklch(62% 0.082 260)", "oklch(76% 0.06 260)", "oklch(88% 0.035 260)", "oklch(96% 0.015 260)"] },
+      "paper-pressed": { "role": "neutral", "displayName": "Pressed Paper", "canonical": "#e4e2dc", "tonalRamp": ["oklch(15% 0.008 91)", "oklch(25% 0.008 91)", "oklch(35% 0.008 91)", "oklch(48% 0.008 91)", "oklch(62% 0.008 91)", "oklch(76% 0.008 91)", "oklch(91.3% 0.008 91)", "oklch(96% 0.008 91)"] },
+      "reversed-support": { "role": "neutral", "displayName": "Reversed Support", "canonical": "#c8c9c2", "tonalRamp": ["oklch(15% 0.010 113)", "oklch(25% 0.010 113)", "oklch(35% 0.010 113)", "oklch(48% 0.010 113)", "oklch(62% 0.010 113)", "oklch(76% 0.010 113)", "oklch(83.3% 0.010 113)", "oklch(96% 0.010 113)"] },
+      "reversed-focus": { "role": "tertiary", "displayName": "Reversed Focus", "canonical": "#b9c7e2", "tonalRamp": ["oklch(15% 0.041 264)", "oklch(25% 0.041 264)", "oklch(35% 0.041 264)", "oklch(48% 0.041 264)", "oklch(62% 0.041 264)", "oklch(76% 0.041 264)", "oklch(82.8% 0.041 264)", "oklch(96% 0.015 264)"] }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Hero h1 only; Bricolage Grotesque 700." },
-      "headline": { "displayName": "Headline", "purpose": "Section h2; Bricolage Grotesque 700." },
-      "lede": { "displayName": "Lede", "purpose": "Section subs, 64-68ch max." },
-      "body": { "displayName": "Body", "purpose": "System stack prose." },
-      "label": { "displayName": "Kicker", "purpose": "One uppercase tracked kicker per section; deliberate brand system." },
-      "mono": { "displayName": "Mono", "purpose": "Commands, ports, model names, hashes; IBM Plex Mono." }
+      "display": { "displayName": "Display", "purpose": "The single intro h1; Bricolage Grotesque 620." },
+      "headline": { "displayName": "Headline", "purpose": "Section h2s; Bricolage Grotesque 620." },
+      "headline-close": { "displayName": "Headline, close", "purpose": "The h2 inside the closing ink band only." },
+      "wordmark": { "displayName": "Wordmark", "purpose": "AFK AI beside the mark in the top bar." },
+      "title": { "displayName": "Title", "purpose": "h3s and fact terms, in the Windows UI face at 650." },
+      "lede": { "displayName": "Lede", "purpose": "The one intro paragraph, 36rem measure." },
+      "body": { "displayName": "Body", "purpose": "All prose, Windows UI face." },
+      "caption": { "displayName": "Caption", "purpose": "Figure captions, installer line, capture note; support ink." },
+      "machine": { "displayName": "Machine", "purpose": "Inline spans only: version, installer filename, build IDs. IBM Plex Mono with tabular figures." }
     },
-    "shadows": [
-      { "name": "card-soft", "value": "0 10px 30px -10px rgb(0 0 0 / 0.08)", "purpose": "The single card shadow (light theme)." },
-      { "name": "card-soft-dark", "value": "0 24px 70px rgba(0,0,0,.30)", "purpose": "Dark-theme counterpart of card-soft." }
-    ],
+    "shadows": [],
     "motion": [
-      { "name": "ease-ui", "value": "0.18s ease", "purpose": "Hover lifts, border tints, tab/chip state changes." }
+      { "name": "onto-bench", "value": "700ms cubic-bezier(0.16, 1, 0.3, 1) both; from translateX(2.5rem) opacity 0.4", "purpose": "The lead window slides onto the bench once on load. Only under prefers-reduced-motion: no-preference; visible without it." },
+      { "name": "button-fill", "value": "background-color 140ms ease-out", "purpose": "Primary and reversed button hover fill change; no movement." },
+      { "name": "anchor-scroll", "value": "scroll-behavior: smooth; auto under prefers-reduced-motion: reduce", "purpose": "Section links under the sticky bar (scroll-padding-top 5rem)." }
     ],
     "breakpoints": [
-      { "name": "tablet", "value": "980px" },
-      { "name": "mobile", "value": "640px" }
+      { "name": "phone-crop", "value": "40rem" },
+      { "name": "nav", "value": "48rem" },
+      { "name": "two-col", "value": "56rem" },
+      { "name": "bench-bleed", "value": "64rem" }
     ]
   },
   "components": [
@@ -51,77 +44,97 @@
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "The download CTA: ink pill that inverts against the page.",
-      "html": "<a class=\"ds-btn-primary\" href=\"#\">Download the installer</a>",
-      "css": ".ds-btn-primary { display:inline-flex; align-items:center; gap:8px; background:#0a0c14; color:#f6f8fc; padding:10px 13px; border-radius:9999px; border:1px solid transparent; text-decoration:none; transition:transform .18s ease, filter .18s ease; } .ds-btn-primary:hover { transform:translateY(-1px); filter:brightness(1.05); } .ds-btn-primary:focus-visible { outline:2px solid #2563eb; outline-offset:3px; }"
+      "description": "The one dark action per region: ink fill, paper text, 44px tall.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Download AFK AI for Windows</a>",
+      "css": ".ds-btn-primary { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:0.55rem 1.25rem; border-radius:4px; background:var(--ink, #1f211d); color:var(--paper, #f8f7f3); font-family:'Segoe UI Variable Text','Segoe UI',system-ui,sans-serif; font-weight:600; text-decoration:none; transition:background-color 140ms ease-out; } .ds-btn-primary:hover { background:#3a3d36; } .ds-btn-primary:focus-visible { outline:2px solid var(--focus, #435f8d); outline-offset:3px; }"
     },
     {
-      "name": "Ghost Button",
+      "name": "Quiet Link",
       "kind": "button",
-      "refersTo": "button",
-      "description": "Secondary pill action with hairline border.",
-      "html": "<button class=\"ds-btn\">See install options</button>",
-      "css": ".ds-btn { display:inline-flex; align-items:center; gap:8px; background:#ffffff; color:#0a0c14; padding:10px 13px; border-radius:9999px; border:1px solid #dbe4f0; cursor:pointer; transition:transform .18s ease, border-color .18s ease; } .ds-btn:hover { transform:translateY(-1px); border-color:#b9c8ea; } .ds-btn:focus-visible { outline:2px solid #2563eb; outline-offset:3px; }"
+      "refersTo": "button-primary",
+      "description": "The secondary action beside a primary: underlined text, never a second button.",
+      "html": "<a class=\"ds-quiet\" href=\"#\">What to check first</a>",
+      "css": ".ds-quiet { display:inline-flex; align-items:center; min-height:44px; color:var(--ink, #1f211d); font-family:'Segoe UI Variable Text','Segoe UI',system-ui,sans-serif; font-weight:600; text-decoration-thickness:1px; text-underline-offset:0.22em; } .ds-quiet:hover { text-decoration-thickness:2px; } .ds-quiet:focus-visible { outline:2px solid var(--focus, #435f8d); outline-offset:3px; }"
     },
     {
-      "name": "Card",
+      "name": "Closing Band",
+      "kind": "custom",
+      "refersTo": "closing-band",
+      "description": "The page's single ink reversal and close, holding the final download as a reversed button.",
+      "html": "<section class=\"ds-final\"><h2>Try the current build.</h2><div><a class=\"ds-btn-rev\" href=\"#\">Download AFK AI for Windows</a><p>Beta <span class=\"ds-machine\">0.2.0-rc1</span> · MIT licensed</p></div></section>",
+      "css": ".ds-final { display:grid; gap:1.5rem; padding:3.5rem 2rem; background:var(--ink, #1f211d); color:var(--paper, #f8f7f3); } .ds-final h2 { margin:0; font-family:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif; font-weight:620; font-size:2.4rem; line-height:1.02; letter-spacing:-0.03em; } .ds-final div { display:grid; gap:1rem; justify-items:start; } .ds-final p { margin:0; color:#c8c9c2; font-size:0.9375rem; } .ds-btn-rev { display:inline-flex; align-items:center; min-height:44px; padding:0.55rem 1.25rem; border-radius:4px; background:#f8f7f3; color:#1f211d; font-weight:600; text-decoration:none; transition:background-color 140ms ease-out; } .ds-btn-rev:hover { background:#e4e2dc; } .ds-btn-rev:focus-visible { outline:2px solid #b9c7e2; outline-offset:3px; } .ds-machine { font-family:'IBM Plex Mono','Cascadia Mono',Consolas,monospace; font-size:0.86em; font-variant-numeric:tabular-nums; }"
+    },
+    {
+      "name": "Top Bar",
+      "kind": "nav",
+      "refersTo": "top-bar",
+      "description": "Sticky paper bar: mark and wordmark, three support-ink section links, compact Download.",
+      "html": "<header class=\"ds-top\"><a class=\"ds-brand\" href=\"#\"><svg viewBox=\"0 0 64 64\" width=\"28\" height=\"28\" aria-hidden=\"true\"><circle cx=\"32\" cy=\"32\" r=\"30\" fill=\"#1f211d\"/><path d=\"M28.2 15h7.6l12.7 34h-7l-2.8-8H25.3l-2.8 8h-7l12.7-34Zm-.9 20.3h9.4L32 21.8l-4.7 13.5Z\" fill=\"#f8f7f3\"/></svg><span>AFK AI</span></a><nav><a href=\"#\">How it works</a><a href=\"#\">Before you install</a><a href=\"#\">Your data</a></nav><a class=\"ds-btn-compact\" href=\"#\">Download</a></header>",
+      "css": ".ds-top { display:flex; align-items:center; gap:1rem 2rem; min-height:4rem; padding:0 1.5rem; background:color-mix(in srgb, #f8f7f3 94%, transparent); backdrop-filter:blur(10px); border-bottom:1px solid #d5d3ca; font-family:'Segoe UI Variable Text','Segoe UI',system-ui,sans-serif; } .ds-brand { display:inline-flex; align-items:center; gap:0.6rem; min-height:44px; color:#1f211d; font-family:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif; font-weight:650; font-size:1.25rem; letter-spacing:-0.01em; text-decoration:none; } .ds-top nav { display:flex; gap:0 1.5rem; margin-left:auto; } .ds-top nav a { display:inline-flex; align-items:center; min-height:44px; color:#5f625a; font-size:0.9375rem; text-decoration:none; } .ds-top nav a:hover { color:#1f211d; } .ds-top a:focus-visible { outline:2px solid #435f8d; outline-offset:3px; } .ds-btn-compact { display:inline-flex; align-items:center; min-height:44px; padding:0.4rem 1rem; border-radius:4px; background:#1f211d; color:#f8f7f3; font-weight:600; font-size:0.9375rem; text-decoration:none; transition:background-color 140ms ease-out; } .ds-btn-compact:hover { background:#3a3d36; }"
+    },
+    {
+      "name": "Bench Window",
       "kind": "card",
-      "refersTo": "card",
-      "description": "The standard content card.",
-      "html": "<div class=\"ds-card\"><h3>Chat UI</h3><p>Open WebUI, the familiar ChatGPT-style interface.</p><div class=\"ds-mini\">localhost:3000</div></div>",
-      "css": ".ds-card { background:#ffffff; border:1px solid #dbe4f0; border-radius:12px; box-shadow:0 10px 30px -10px rgb(0 0 0 / 0.08); padding:28px; color:#0a0c14; } .ds-card h3 { margin:0 0 10px; font-size:1.02rem; } .ds-card p { margin:0; color:#5b6980; } .ds-mini { margin-top:12px; font-family:'IBM Plex Mono', ui-monospace, monospace; font-size:.84rem; color:#22304a; }"
+      "refersTo": "bench",
+      "description": "Signature: a real app capture padded on the 8px material bench, with a dated support-ink caption.",
+      "html": "<figure class=\"ds-window\"><div class=\"ds-bench\"><div class=\"ds-capture\">[real capture]</div></div><figcaption>Home starting from a stopped PC, 24 Sep 2026.</figcaption></figure>",
+      "css": ".ds-window { display:grid; gap:0.75rem; margin:0; max-width:36rem; font-family:'Segoe UI Variable Text','Segoe UI',system-ui,sans-serif; } .ds-bench { padding:1.25rem; background:#eee8dc; border-radius:8px; } .ds-capture { display:grid; place-items:center; aspect-ratio:2/1; background:#f8f7f3; color:#5f625a; font-size:0.875rem; } .ds-window figcaption { color:#5f625a; font-size:0.875rem; line-height:1.5; }"
     },
     {
-      "name": "Code Block",
+      "name": "Fact Rows",
       "kind": "custom",
-      "refersTo": "code-block",
-      "description": "Always-dark terminal well with floating Copy pill.",
-      "html": "<div class=\"ds-code\"><button class=\"ds-copy\">Copy</button><pre>localai anywhere --apply</pre></div>",
-      "css": ".ds-code { position:relative; border-radius:12px; background:#0b1020; border:1px solid rgba(255,255,255,.08); } .ds-code pre { margin:0; padding:18px; color:#e6ecff; font-family:'IBM Plex Mono', ui-monospace, monospace; font-size:.9rem; line-height:1.65; } .ds-copy { position:absolute; top:10px; right:10px; padding:8px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.08); color:#fff; font-size:.82rem; cursor:pointer; transition:transform .18s ease, background .18s ease; } .ds-copy:hover { transform:translateY(-1px); background:rgba(255,255,255,.12); }"
+      "refersTo": "body",
+      "description": "Definition list as ruled rows: ink term, support-ink definition, 1px separators.",
+      "html": "<dl class=\"ds-facts\"><div><dt>Windows</dt><dd>Windows 11, 64-bit</dd></div><div><dt>Space</dt><dd>About 40 GB free. The first setup downloads several gigabytes.</dd></div></dl>",
+      "css": ".ds-facts { display:grid; margin:0; border-top:1px solid #d5d3ca; font-family:'Segoe UI Variable Text','Segoe UI',system-ui,sans-serif; color:#1f211d; } .ds-facts div { display:grid; grid-template-columns:9rem 1fr; column-gap:1.5rem; padding-block:0.9rem; border-bottom:1px solid #d5d3ca; } .ds-facts dt { font-weight:650; } .ds-facts dd { margin:0; color:#5f625a; }"
     },
     {
-      "name": "Tier Chip",
-      "kind": "chip",
-      "refersTo": "button",
-      "description": "VRAM tier pill toggle with aria-pressed state.",
-      "html": "<button class=\"ds-chip ds-chip-active\">12 GB</button> <button class=\"ds-chip\">8 GB</button>",
-      "css": ".ds-chip { padding:9px 12px; border-radius:9999px; border:1px solid #dbe4f0; background:#ffffff; color:#5b6980; cursor:pointer; transition:background .18s ease, color .18s ease, border-color .18s ease, transform .18s ease; } .ds-chip:hover { color:#0a0c14; transform:translateY(-1px); } .ds-chip-active { background:#dbe7fb; color:#0a0c14; border-color:#9db9ea; }"
-    },
-    {
-      "name": "Step Item",
+      "name": "Ruled Step",
       "kind": "custom",
-      "refersTo": "card",
-      "description": "Numbered sequence item for the phone-access guide.",
-      "html": "<ol class=\"ds-steps\"><li><h3>Publish from the PC, once</h3><p>Run the command and the chat lands on your private tailnet.</p></li></ol>",
-      "css": ".ds-steps { list-style:none; counter-reset:step; margin:0; padding:0; display:grid; gap:22px; } .ds-steps li { counter-increment:step; position:relative; padding-left:52px; } .ds-steps li:before { content:counter(step); position:absolute; left:0; top:0; width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono', ui-monospace, monospace; font-weight:600; color:#2563eb; background:#e7edfb; border:1px solid #a9c0ec; } .ds-steps h3 { margin:4px 0 6px; font-size:1.05rem; color:#0a0c14; } .ds-steps p { margin:0; color:#5b6980; line-height:1.6; }"
+      "refersTo": "title",
+      "description": "Step or boundary item opened by a 2px ink rule; order from the list, no drawn badges.",
+      "html": "<ol class=\"ds-steps\"><li><h3>It checks before it downloads</h3><p>Windows, virtualization, WSL, Docker and your hardware are checked first.</p></li><li><h3>It starts everything in order</h3><p>Home reports ready only after chat has actually answered.</p></li></ol>",
+      "css": ".ds-steps { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:1.75rem; font-family:'Segoe UI Variable Text','Segoe UI',system-ui,sans-serif; } .ds-steps li { display:grid; gap:0.5rem; align-content:start; padding-top:1rem; border-top:2px solid #1f211d; } .ds-steps h3 { margin:0; font-size:1.125rem; line-height:1.35; font-weight:650; color:#1f211d; } .ds-steps p { margin:0; color:#5f625a; }"
     }
   ],
   "narrative": {
-    "northStar": "The Honest Workbench",
-    "overview": "A bright, airy landing page whose credibility IS the aesthetic: every claim is verifiable, every tradeoff stated in place, every machine fact set in mono. Bricolage Grotesque display over a plain system body, one blue accent, an emerald signal color, and a true dark theme mirrored through CSS variables.",
+    "northStar": "The Warm Local Workbench",
+    "overview": "A workbench, not a launch page. The product is shown by its own real windows, each resting on a warm material bench, with plain copy beside them on paper. The palette is the AFK AI app's own: warm paper, one warm material, near-black ink, a muted support ink, quiet separators and a single blue reserved for focus. There is one dark action per region, and the page closes on one ink band that holds the final download, an echo of the ALLUSIONS studio's single dark reversal.\n\nDensity is calm and document-like: generous section spacing, a readable measure, facts set as ruled rows rather than cards. Headings in Bricolage Grotesque tie the page to the ALLUSIONS family; everything else reads in the Windows UI face, because the product is a Windows app. The page is light only, static HTML and CSS with no JavaScript. Its one motion is the lead window sliding onto the bench once.\n\nThe world refuses the category defaults of gradient hero art, feature-icon grids, fake terminals and capability maps that stand in for the product. The captures are the imagery.",
     "keyCharacteristics": [
-      "Zero third-party origins: self-hosted fonts, no analytics, CSP 'self' only.",
-      "Class-only styling; no inline styles ever.",
-      "One page, real anchors, progressive disclosure via details elements.",
-      "Honest copy: no em dashes, no hype adjectives, tradeoffs beside features."
+      "Real app captures on a warm bench are the only imagery; each carries a dated caption and documented provenance.",
+      "One warm material, used in exactly two roles: the bench and the single emphasised section.",
+      "One dark primary action per region; secondary actions are quiet underlined links.",
+      "One ink reversal, at the end, as the page's close.",
+      "Flat paper: no shadows. Depth comes from material and rules.",
+      "Mono only inside running text, for machine strings.",
+      "No homepage JavaScript; light scheme only; 44px targets; motion only when the visitor has not asked for less."
     ],
     "rules": [
-      { "name": "The Color-Is-State Rule", "body": "If something is colored, it carries meaning (status, action, focus). Decoration stays neutral.", "section": "colors" },
-      { "name": "The Machine-Speaks-Mono Rule", "body": "Commands, ports, model names, and hashes are always mono; prose never is.", "section": "typography" }
+      { "name": "The One Bench Rule", "body": "Material appears in exactly two places: under real app windows and as the one emphasised section. No other card, panel or band uses it. A second emphasised section breaks the rule.", "section": "colors" },
+      { "name": "The Blue Is Focus Rule", "body": "The only chromatic colour on the page marks keyboard focus. It is never decoration, a link colour or a fill.", "section": "colors" },
+      { "name": "The Reserved Green Rule", "body": "Green belongs to a qualified success state, as in the app, and does not appear on the homepage. Do not use it for decoration or for \"ready\" claims the page cannot show.", "section": "colors" },
+      { "name": "The Machine Span Rule", "body": "IBM Plex Mono appears only inline, at 0.86em with tabular figures, for strings a machine produced: the version (`0.2.0-rc1`), the installer filename and build IDs (`37cbaed`). It never sets a heading, a label, a section marker or a paragraph.", "section": "typography" },
+      { "name": "The No Kicker Rule", "body": "Headings stand on their own. No eyebrow, kicker, reference label or numbered section tag sits above them.", "section": "typography" },
+      { "name": "The Flat Paper Rule", "body": "Nothing casts a shadow. If a surface needs to stand forward, it is material or it is ink.", "section": "elevation" },
+      { "name": "The Ink Close Rule", "body": "The page has exactly one ink reversal, and it is the last section before the footer, holding the final download. It is the close, not a second emphasised section; nothing ink appears mid-page.", "section": "elevation" }
     ],
     "dos": [
-      "Do keep every port, command, and model name in IBM Plex Mono.",
-      "Do state the honest tradeoff next to every capability claim.",
-      "Do use classes for all styling; the CSP forbids inline styles.",
-      "Do mirror any new light-theme value with a dark-theme counterpart.",
-      "Do keep sequences numbered only when order genuinely matters."
+      "Do show the product with real, dated captures on the material bench, and add each new raster to PROVENANCE.md.",
+      "Do keep one dark primary action per region and pair it with a quiet link, not a second button.",
+      "Do end the page on the single ink band that holds the final download.",
+      "Do keep every interactive target at least 44px tall, including compact variants.",
+      "Do serve a portrait crop through `picture`/`source` below 40rem instead of shrinking a wide window.",
+      "Do gate any motion on `prefers-reduced-motion: no-preference` and keep content visible without it.",
+      "Do keep fonts and assets self-hosted and styling in the stylesheet; the CSP allows same-origin only and no inline styles."
     ],
     "donts": [
-      "Don't add any third-party origin (fonts, scripts, images, embeds).",
-      "Don't use em dashes in copy, hype adjectives, or urgency patterns.",
-      "Don't ship SaaS gradient-wash, vanity metrics, or glassmorphism.",
-      "Don't color decoration; color is state, action, or focus.",
-      "Don't let the footage mock's reds/teals leak into page chrome."
+      "Don't use material for anything except the bench and the one emphasised section.",
+      "Don't add eyebrows, kickers, mono reference labels or numbered section tags above headings.",
+      "Don't set anything but version strings, filenames and build IDs in IBM Plex Mono.",
+      "Don't add shadows, gradients, glass panels beyond the top bar's blur, or a second ink band mid-page.",
+      "Don't use blue for anything but focus, or green anywhere on the homepage.",
+      "Don't replace captures with mock-ups, drawn UI, fake terminals, capability maps or feature-icon grids.",
+      "Don't add JavaScript or a theme toggle to the homepage; it is static and light only."
     ]
   }
 }
