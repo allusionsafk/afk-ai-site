@@ -40,9 +40,9 @@ function toHex(buffer) {
   return out;
 }
 
-function errorResponse(status) {
+function errorResponse(status, isHead) {
   return new Response(
-    JSON.stringify({ error: 'installer_unavailable' }),
+    isHead ? null : JSON.stringify({ error: 'installer_unavailable' }),
     {
       status,
       headers: {
@@ -109,9 +109,9 @@ export async function handleDownload(request, ctx, opts) {
   const hit = await cache.match(cacheKey);
   if (hit) {
     let body;
-    try { body = await hit.arrayBuffer(); } catch (e) { return errorResponse(502); }
+    try { body = await hit.arrayBuffer(); } catch (e) { return errorResponse(502, isHead); }
     if (!(await hasExpectedIdentity(body, expectedLength, expectedSha))) {
-      return errorResponse(502);
+      return errorResponse(502, isHead);
     }
     return new Response(isHead ? null : body, {
       status: 200,
@@ -137,13 +137,13 @@ export async function handleDownload(request, ctx, opts) {
       clearTimeout(timer);
     }
   } catch (e) {
-    return errorResponse(502);
+    return errorResponse(502, isHead);
   }
 
   // Integrity gate. An upstream that has been tampered with, truncated, or
   // silently repointed must not reach a visitor's machine as an executable.
   if (!(await hasExpectedIdentity(bytes, expectedLength, expectedSha))) {
-    return errorResponse(502);
+    return errorResponse(502, isHead);
   }
 
   const cacheable = new Response(bytes, {

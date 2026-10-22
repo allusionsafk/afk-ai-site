@@ -42,12 +42,26 @@ Repository documentation and development files outside `public/` are not deploye
 ## Local development
 
 ```bash
-npm ci
+npm ci --ignore-scripts
 npm run dev
 npm test
+npm run test:runtime
 ```
 
 `npm run dev` starts Wrangler with the Worker route. A plain static server can preview the page, but `/download` will not work and the site does not fall back to an unpinned installer.
+
+Use Node.js 24, as CI does. Wrangler and its Miniflare runtime are pinned together;
+Miniflare uses its supported configuration adapter in the runtime test. The scoped
+Undici override updates Miniflare's HTTP client to 7.30.1, which contains security
+fixes missing from its upstream 7.29.1 pin. Sharp resolves to 0.35.5. These are
+development dependencies; the deployed Worker imports no npm packages.
+
+`test:runtime` executes the production module in local workerd with synthetic
+installer bytes and an isolated cache. It checks integrity, cache reuse, GET/HEAD
+errors, asset fallback and the real 15-second body deadline without contacting
+GitHub or deploying. CI also bundles with `wrangler deploy --dry-run`. Update the
+tooling pins and override together, then repeat the runtime test and `npm audit`.
+Native optional packages support these checks with lifecycle scripts disabled.
 
 ## Deployment
 
