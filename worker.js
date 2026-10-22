@@ -123,18 +123,19 @@ export async function handleDownload(request, ctx, opts) {
   try {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), UPSTREAM_TIMEOUT_MS);
-    let upstream;
     try {
-      upstream = await fetch(sourceUrl, {
+      const upstream = await fetch(sourceUrl, {
         headers: { 'User-Agent': 'afk-ai-site' },
         signal: controller.signal,
         cf: { cacheTtl: 900, cacheEverything: true },
       });
+      if (!upstream.ok) throw new Error(`upstream ${upstream.status}`);
+      // fetch() resolves at headers; keep the deadline through body consumption
+      // so a stalled installer stream cannot outlive the upstream timeout.
+      bytes = await upstream.arrayBuffer();
     } finally {
       clearTimeout(timer);
     }
-    if (!upstream.ok) throw new Error(`upstream ${upstream.status}`);
-    bytes = await upstream.arrayBuffer();
   } catch (e) {
     return errorResponse(502);
   }

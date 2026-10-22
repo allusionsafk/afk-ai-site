@@ -25,6 +25,34 @@ function upstreamOk(bytes) {
   return async () => new Response(bytes, { status: 200, headers: { 'content-length': String(bytes.length) } });
 }
 
+// Advance only the Worker's deadline, without wall-clock waits or real HTTP.
+async function withDeadline(run) {
+  const originalSetTimeout = globalThis.setTimeout;
+  const originalClearTimeout = globalThis.clearTimeout;
+  const pending = new Map();
+  globalThis.setTimeout = (callback, delay) => {
+    const timer = {};
+    pending.set(timer, { callback, delay });
+    return timer;
+  };
+  globalThis.clearTimeout = (timer) => pending.delete(timer);
+  try {
+    await run({
+      expire() {
+        for (const [timer, { callback, delay }] of pending) {
+          if (delay !== 15000) throw new Error('Unexpected upstream deadline');
+          pending.delete(timer);
+          callback();
+        }
+      },
+      get pending() { return pending.size; },
+    });
+  } finally {
+    globalThis.setTimeout = originalSetTimeout;
+    globalThis.clearTimeout = originalClearTimeout;
+  }
+}
+
 let pass = 0, fail = 0;
 function check(name, cond) { (cond ? (pass++, console.log('  ok  ' + name)) : (fail++, console.log('FAIL  ' + name))); }
 
@@ -80,6 +108,74 @@ globalThis.fetch = async () => { throw new Error('network'); };
 res = await handleDownload(new Request('https://site/download'), ctx, OPTS);
 console.log('Case 4 — upstream throws:');
 check('status 502', res.status === 502);
+
+// --- Case 4b: receiving headers must not end the upstream deadline ---
+console.log('Case 4b — installer body deadline:');
+await withDeadline(async (deadline) => {
+  resetCache();
+  let aborted = false;
+  globalThis.fetch = async (_url, { signal }) => new Response(new ReadableStream({
+    start(controller) {
+      signal.addEventListener('abort', () => {
+        aborted = true;
+        controller.error(new DOMException('Installer body timed out', 'AbortError'));
+      }, { once: true });
+    },
+    pull(controller) {
+      // Headers have arrived; time runs out only when consumption starts.
+      deadline.expire();
+      if (!signal.aborted) {
+        controller.enqueue(PAYLOAD);
+        controller.close();
+      }
+    },
+  }, { highWaterMark: 0 }));
+  res = await handleDownload(new Request('https://site/download'), ctx, OPTS);
+  check('deadline aborts the upstream body after headers arrive', aborted);
+  check('expired body returns 502', res.status === 502);
+  check('expired body returns only the generic error',
+    await res.text() === '{"error":"installer_unavailable"}');
+  check('expired body is never cached', cacheStore.size === 0);
+  check('expired body leaves no pending deadline', deadline.pending === 0);
+});
+
+// --- Case 4c: successful bodies release the deadline without aborting ---
+await withDeadline(async (deadline) => {
+  resetCache();
+  let signal;
+  globalThis.fetch = async (_url, init) => {
+    signal = init.signal;
+    return new Response(PAYLOAD);
+  };
+  res = await handleDownload(new Request('https://site/download'), ctx, OPTS);
+  check('completed body is still served', res.status === 200);
+  check('completed body clears its deadline', deadline.pending === 0);
+  deadline.expire();
+  check('completed request is never aborted later', !signal.aborted);
+});
+
+// --- Case 4d: every upstream failure releases the deadline ---
+for (const failure of ['headers timeout', 'HTTP error', 'body read error']) {
+  await withDeadline(async (deadline) => {
+    resetCache();
+    globalThis.fetch = async (_url, { signal }) => {
+      if (failure === 'headers timeout') {
+        return new Promise((_resolve, reject) => {
+          signal.addEventListener('abort', () => reject(signal.reason), { once: true });
+          deadline.expire();
+        });
+      }
+      if (failure === 'HTTP error') return new Response('unavailable', { status: 503 });
+      return new Response(new ReadableStream({
+        start(controller) { controller.error(new Error('interrupted body')); },
+      }));
+    };
+    res = await handleDownload(new Request('https://site/download'), ctx, OPTS);
+    check(`${failure} returns 502`, res.status === 502);
+    check(`${failure} clears its deadline`, deadline.pending === 0);
+    check(`${failure} is never cached`, cacheStore.size === 0);
+  });
+}
 
 // --- Case 5: HEAD returns headers but no body ---
 resetCache();
