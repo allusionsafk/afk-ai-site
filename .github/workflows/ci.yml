@@ -38,11 +38,19 @@ jobs:
       # `npm ci` rather than `npm install`: the lockfile is the contract, and a
       # drifted lockfile should fail here rather than resolve differently.
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       # Worker behaviour, the fail-closed integrity gate, and the release pin.
       - name: Run the test suite
         run: npm test
+
+      - name: Verify the Worker in the local Cloudflare runtime
+        run: npm run test:runtime
+
+      - name: Bundle the Worker without deploying
+        run: npx wrangler deploy --dry-run --outdir .wrangler/dry-run
+        env:
+          WRANGLER_SEND_METRICS: 'false'
 
       # The homepage ships no JavaScript today; any script added under public/ is
       # still syntax-checked here.

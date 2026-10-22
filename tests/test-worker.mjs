@@ -186,6 +186,30 @@ check('status 200', res.status === 200);
 check('content-length still advertised', res.headers.get('content-length') === String(PAYLOAD.length));
 check('body empty', (await res.arrayBuffer()).byteLength === 0);
 
+// HEAD must remain bodyless on every failure path, while retaining the same
+// generic status and security headers as GET. Integrity verification still runs.
+console.log('Case 5b — HEAD failures:');
+for (const failure of ['upstream HTTP', 'upstream body', 'length', 'digest', 'cache bytes', 'cache read']) {
+  resetCache();
+  globalThis.fetch = upstreamOk(PAYLOAD);
+  if (failure === 'upstream HTTP') globalThis.fetch = async () => new Response('private details', { status: 503 });
+  if (failure === 'upstream body') globalThis.fetch = async () => new Response(new ReadableStream({
+    start(controller) { controller.error(new Error('private details')); },
+  }));
+  if (failure === 'length') globalThis.fetch = upstreamOk(PAYLOAD.slice(1));
+  if (failure === 'digest') globalThis.fetch = upstreamOk(PAYLOAD.map((byte) => byte ^ 1));
+  if (failure === 'cache bytes') globalThis.caches.default.match = async () => new Response('corrupt');
+  if (failure === 'cache read') globalThis.caches.default.match = async () => ({
+    async arrayBuffer() { throw new Error('private cache details'); },
+  });
+  res = await handleDownload(new Request('https://site/download', { method: 'HEAD' }), ctx, OPTS);
+  check(`${failure} HEAD returns 502`, res.status === 502);
+  check(`${failure} HEAD has no body`, res.body === null && (await res.text()) === '');
+  check(`${failure} HEAD keeps generic JSON metadata`, res.headers.get('content-type') === 'application/json; charset=utf-8');
+  check(`${failure} HEAD cannot be cached`, res.headers.get('cache-control') === 'no-store' && cacheStore.size === 0);
+  check(`${failure} HEAD keeps the restrictive CSP`, res.headers.get('content-security-policy') === "default-src 'none'");
+}
+
 // --- Case 6: cache key ignores the query string ---
 resetCache();
 globalThis.fetch = upstreamOk(PAYLOAD);
