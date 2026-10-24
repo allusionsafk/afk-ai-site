@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
-    "test": "node tests/test-worker.mjs && node tests/test-csp.mjs && node tests/test-homepage.mjs",
+    "test": "node tests/test-worker.mjs && node --test tests/worker-body-bounds.test.mjs && node tests/test-csp.mjs && node tests/test-homepage.mjs",
     "test:runtime": "node --test tests/worker-runtime.test.mjs"
   },
   "devDependencies": {

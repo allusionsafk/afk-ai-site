@@ -45,6 +45,12 @@ test('download contracts in the Cloudflare runtime', { timeout: 30000 }, async (
       const mode = new URL(request.url).pathname;
       if (mode === '/unavailable') return new Response('private upstream details', { status: 503 });
       if (mode === '/corrupt') return new Response(new Uint8Array([0x4d, 0x5a, 0, 0xfe]));
+      if (mode === '/oversized') return new Response(new ReadableStream({
+        start(controller) { controller.enqueue(new Uint8Array([...payload, 0])); controller.close(); },
+      }));
+      if (mode === '/oversized-header') return new Response(new Uint8Array([...payload, 0]), {
+        headers: { 'content-length': '5' },
+      });
       if (mode === '/stall') return new Response(new ReadableStream({
         start(controller) { controller.enqueue(payload.slice(0, 1)); },
       }));
@@ -67,7 +73,7 @@ test('download contracts in the Cloudflare runtime', { timeout: 30000 }, async (
     assert.equal(await response.text(), '');
     assert.equal(upstreamCalls, 1, 'query changes and HEAD reuse the verified cache entry');
 
-    for (const mode of ['unavailable', 'corrupt']) {
+    for (const mode of ['unavailable', 'corrupt', 'oversized', 'oversized-header']) {
       response = await mf.dispatchFetch(`https://site/fixture/${mode}?mode=${mode}`);
       assert.equal(response.status, 502);
       assert.equal(await response.text(), '{"error":"installer_unavailable"}');
@@ -77,7 +83,7 @@ test('download contracts in the Cloudflare runtime', { timeout: 30000 }, async (
       assert.equal(response.headers.get('cache-control'), 'no-store');
       assert.equal(response.headers.get('content-security-policy'), "default-src 'none'");
     }
-    assert.equal(upstreamCalls, 5, 'failed GET responses never enter the cache');
+    assert.equal(upstreamCalls, 9, 'failed GET responses never enter the cache');
 
     response = await mf.dispatchFetch('https://site/download', { method: 'POST' });
     assert.equal(response.status, 405);
