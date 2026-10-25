@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { test } from 'node:test';
-import { handleDownload } from '../worker.js';
+import worker, { handleDownload } from '../worker.js';
 
 const payload = new Uint8Array([0x4d, 0x5a, 0, 0, 0, 0, 0, 0]);
 const options = {
@@ -97,3 +97,51 @@ test('exact streamed bytes are verified and only then cached', async t => {
   assert.equal(cached.length, 1);
   assert.deepEqual(new Uint8Array(await cached[0].arrayBuffer()), payload);
 });
+
+async function assertUnavailable(response, method) {
+  assert.equal(response.status, 502);
+  assert.equal(await response.text(), method === 'HEAD' ? '' : '{"error":"installer_unavailable"}');
+  if (method === 'HEAD') assert.equal(response.body, null);
+  assert.equal(response.headers.get('content-type'), 'application/json; charset=utf-8');
+  assert.equal(response.headers.get('cache-control'), 'no-store');
+  assert.equal(response.headers.get('x-content-type-options'), 'nosniff');
+  assert.equal(response.headers.get('content-security-policy'), "default-src 'none'");
+  assert.equal(response.headers.get('x-frame-options'), 'DENY');
+}
+
+for (const method of ['GET', 'HEAD']) {
+  test(`cache lookup rejection returns a generic ${method} response`, async t => {
+    const cached = environment(t);
+    globalThis.caches.default.match = async () => { throw new Error('private cache details'); };
+    globalThis.fetch = async () => { throw new Error('lookup failure must not fetch unverified upstream'); };
+    const response = await handleDownload(new Request('https://site/download', { method }), null, options);
+    await assertUnavailable(response, method);
+    assert.equal(cached.length, 0);
+  });
+
+  for (const source of ['cache', 'upstream']) {
+    test(`${source} digest rejection returns a generic ${method} response`, async t => {
+      const cached = environment(t);
+      if (source === 'cache') {
+        globalThis.caches.default.match = async () => new Response(payload);
+        globalThis.fetch = async () => { throw new Error('cache hit must not query upstream'); };
+      } else {
+        globalThis.fetch = async () => new Response(payload);
+      }
+      t.mock.method(globalThis.crypto.subtle, 'digest', async () => { throw new Error('private digest details'); });
+      const response = await handleDownload(new Request('https://site/download', { method }), null, options);
+      await assertUnavailable(response, method);
+      assert.equal(cached.length, 0);
+    });
+  }
+
+  test(`production download entry guards cache rejection for ${method}`, async t => {
+    const cached = environment(t);
+    globalThis.caches.default.match = async () => { throw new Error('private production cache details'); };
+    const response = await worker.fetch(new Request('https://site/download', { method }), {
+      ASSETS: { fetch() { throw new Error('download failures must not fall through to assets'); } },
+    }, null);
+    await assertUnavailable(response, method);
+    assert.equal(cached.length, 0);
+  });
+}

@@ -131,6 +131,16 @@ export default {
 // bytes. Production callers pass nothing and get the pinned constants above;
 // there is no way to relax the check from outside a request.
 export async function handleDownload(request, ctx, opts) {
+  try {
+    return await checkedDownload(request, ctx, opts);
+  } catch {
+    // Cache and digest failures must not escape the download request or expose
+    // platform details. Fatal isolate/resource failures remain runtime-owned.
+    return errorResponse(502, request.method === 'HEAD');
+  }
+}
+
+async function checkedDownload(request, ctx, opts) {
   const sourceUrl = (opts && opts.sourceUrl) || INSTALLER_SOURCE;
   const expectedSha = (opts && opts.expectedSha) || INSTALLER_SHA256;
   const expectedLength = (opts && opts.expectedLength) ?? INSTALLER_BYTES;
