@@ -40,9 +40,9 @@ function toHex(buffer) {
   return out;
 }
 
-function errorResponse(status) {
+function errorResponse(status, isHead) {
   return new Response(
-    JSON.stringify({ error: 'installer_unavailable' }),
+    isHead ? null : JSON.stringify({ error: 'installer_unavailable' }),
     {
       status,
       headers: {
@@ -73,6 +73,43 @@ function installerHeaders(length) {
   };
 }
 
+// Keep allocation and consumption bounded by the pinned artifact, including on
+// cache hits. Checking length after arrayBuffer() would first buffer any excess.
+async function readInstallerBody(response, expectedLength) {
+  if (!Number.isSafeInteger(expectedLength) || expectedLength < 1 || expectedLength > INSTALLER_BYTES) {
+    throw new Error('Invalid installer length');
+  }
+  const advertised = response.headers.get('content-length');
+  const encoding = (response.headers.get('content-encoding') || '').trim().toLowerCase();
+  if ((!encoding || encoding === 'identity') && advertised !== null &&
+      (!/^\d+$/.test(advertised) || Number(advertised) !== expectedLength)) {
+    await response.body?.cancel();
+    throw new Error('Unexpected installer length');
+  }
+  if (!response.body) throw new Error('Missing installer body');
+  const reader = response.body.getReader();
+  try {
+    const bytes = new Uint8Array(expectedLength);
+    let received = 0;
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      if (!(value instanceof Uint8Array) || value.byteLength > expectedLength - received) {
+        await reader.cancel();
+        throw new Error('Installer exceeds pinned length');
+      }
+      bytes.set(value, received);
+      received += value.byteLength;
+    }
+    // The remaining preallocated bytes are zero-filled; they must not stand in
+    // for a truncated suffix even if those zeros would match the pinned digest.
+    if (received !== expectedLength) throw new Error('Truncated installer body');
+    return bytes.buffer;
+  } finally {
+    reader.releaseLock();
+  }
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -94,6 +131,16 @@ export default {
 // bytes. Production callers pass nothing and get the pinned constants above;
 // there is no way to relax the check from outside a request.
 export async function handleDownload(request, ctx, opts) {
+  try {
+    return await checkedDownload(request, ctx, opts);
+  } catch {
+    // Cache and digest failures must not escape the download request or expose
+    // platform details. Fatal isolate/resource failures remain runtime-owned.
+    return errorResponse(502, request.method === 'HEAD');
+  }
+}
+
+async function checkedDownload(request, ctx, opts) {
   const sourceUrl = (opts && opts.sourceUrl) || INSTALLER_SOURCE;
   const expectedSha = (opts && opts.expectedSha) || INSTALLER_SHA256;
   const expectedLength = (opts && opts.expectedLength) ?? INSTALLER_BYTES;
@@ -109,9 +156,9 @@ export async function handleDownload(request, ctx, opts) {
   const hit = await cache.match(cacheKey);
   if (hit) {
     let body;
-    try { body = await hit.arrayBuffer(); } catch (e) { return errorResponse(502); }
+    try { body = await readInstallerBody(hit, expectedLength); } catch (e) { return errorResponse(502, isHead); }
     if (!(await hasExpectedIdentity(body, expectedLength, expectedSha))) {
-      return errorResponse(502);
+      return errorResponse(502, isHead);
     }
     return new Response(isHead ? null : body, {
       status: 200,
@@ -132,18 +179,18 @@ export async function handleDownload(request, ctx, opts) {
       if (!upstream.ok) throw new Error(`upstream ${upstream.status}`);
       // fetch() resolves at headers; keep the deadline through body consumption
       // so a stalled installer stream cannot outlive the upstream timeout.
-      bytes = await upstream.arrayBuffer();
+      bytes = await readInstallerBody(upstream, expectedLength);
     } finally {
       clearTimeout(timer);
     }
   } catch (e) {
-    return errorResponse(502);
+    return errorResponse(502, isHead);
   }
 
   // Integrity gate. An upstream that has been tampered with, truncated, or
   // silently repointed must not reach a visitor's machine as an executable.
   if (!(await hasExpectedIdentity(bytes, expectedLength, expectedSha))) {
-    return errorResponse(502);
+    return errorResponse(502, isHead);
   }
 
   const cacheable = new Response(bytes, {
