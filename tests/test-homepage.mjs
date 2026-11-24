@@ -37,6 +37,11 @@ check('homepage has at least two direct download calls to action', (source.match
 check('maker attribution is subordinate and explicit', /Built by\s+<a[^>]*>Allusions<\/a>/i.test(source));
 check('legacy Friend Beta wording is absent', !/Friend Beta/i.test(source));
 check('requirements are stated', /Windows 11/.test(text) && /40 GB/.test(text) && /NVIDIA GPU is recommended/i.test(text) && /Virtualization/i.test(text));
+check('installation guidance explains how to resume after a restart',
+  /restart[\s\S]{0,165}reopen AFK LocalAI[\s\S]{0,100}Check again/i.test(text));
+check('first chat has a concrete success check and a local browser address',
+  /Open Chat[\s\S]{0,130}127\.0\.0\.1:3000[\s\S]{0,165}send a short prompt[\s\S]{0,95}reply/i.test(text));
+check('setup recovery identifies the diagnostics shortcut', /Start menu[\s\S]{0,65}AFK LocalAI[\s\S]{0,65}Diagnostics/i.test(text));
 
 console.log('Case H2 - maturity and evidence structure:');
 for (const maturity of ['shipping', 'beta', 'direction']) {
